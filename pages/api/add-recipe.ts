@@ -14,7 +14,7 @@ const addRecipientHandler = async (req: NextApiRequest, res: NextApiResponse<Rec
         const recipe = await addRecipe(input);
         res.status(200).json(recipe);
     } else {
-        res.status(405).json({error: "GET method is not allowed"})
+        res.status(405).json({error: `${req.method} method is not allowed`})
     }
 }
 
