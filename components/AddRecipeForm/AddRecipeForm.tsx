@@ -27,8 +27,7 @@ export const AddRecipeForm = ({onFormSubmit}: AddRecipeFormProps) => {
 
     return (
         <div>
-            <form onSubmit={(e) => {
-            }}>
+            <form onSubmit={handleSubmit}>
                 <input
                     id="recipe-name"
                     type="text"
