@@ -4,15 +4,21 @@ import {addRecipe} from "../../store/store-functions/add-recipe";
 import {AddRecipeInput} from "../../store/store-functions/add-recipe-input";
 
 
-interface Error {
+interface ApiError {
     error: string;
 }
 
-const addRecipientHandler = async (req: NextApiRequest, res: NextApiResponse<RecipeModel | Error>) => {
+
+const addRecipientHandler = async (req: NextApiRequest, res: NextApiResponse<RecipeModel | ApiError>) => {
     if (req.method === "POST") {
-        const input = req.body as AddRecipeInput;
-        const recipe = await addRecipe(input);
-        res.status(200).json(recipe);
+        try {
+            const input = req.body as AddRecipeInput;
+            const recipe = await addRecipe(input);
+            res.status(200).json(recipe);
+        } catch (err) {
+            res.status(500).json({ error:  (err as any).message|| "Unexpected error"})
+        }
+
     } else {
         res.status(405).json({error: `${req.method} method is not allowed`})
     }
