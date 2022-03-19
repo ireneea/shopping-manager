@@ -1,23 +1,21 @@
-import type { NextPage } from 'next'
-import Head from 'next/head'
-import Image from 'next/image'
+import type {NextPage} from 'next'
+import Link from 'next/link'
+
+import PageLayout from "../components/PageLayout";
 
 const Home: NextPage = () => {
-  return (
-    <>
-      <Head>
-        <title>Shopping Manager</title>
-        <meta name="description" content="Shopping app" />
-      </Head>
+    return (
+        <PageLayout pageTitle="Shopping Manager" isHomePage>
+            <ul>
+                <li>
+                    <Link href="recipes">
+                        <a>Recipes</a>
+                    </Link>
+                </li>
+            </ul>
 
-      <main>
-        <h1>
-          Shopping Manager
-        </h1>
-      </main>
-
-    </>
-  )
+        </PageLayout>
+    )
 }
 
 export default Home
