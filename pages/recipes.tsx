@@ -18,7 +18,7 @@ const Recipes: NextPage<RecipesPros> = ({recipes}) => {
     }
 
     const onAddRecipe = async (recipeName: string) => {
-        const response = await fetch("/api/add-recipe", {
+        const response = await fetch("/api/recipe", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"
