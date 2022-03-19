@@ -1,7 +1,7 @@
 import {ChangeEventHandler, FormEventHandler, useState} from "react";
 
 interface AddRecipeFormProps {
-    onFormSubmit: (recipientName: string) => Promise<any>
+    onFormSubmit: (recipeName: string) => Promise<any>
 }
 
 

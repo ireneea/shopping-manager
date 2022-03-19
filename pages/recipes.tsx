@@ -10,7 +10,7 @@ interface RecipesPros {
 }
 
 const Recipes: NextPage<RecipesPros> = ({recipes}) => {
-    const onAddRecipe = async (recipientName: string) => {
+    const onAddRecipe = async (recipe: string) => {
         // TODO: call an api endpoint
         return true;
     }
