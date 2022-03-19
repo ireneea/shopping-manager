@@ -1,8 +1,8 @@
 import {NextPage, GetStaticProps} from "next";
 
 import PageLayout from "../components/PageLayout";
-import {getRecipes} from "../services/getRecipes";
-import {RecipeModel} from "../services/recipe.model";
+import {RecipeModel} from "../services/models/recipe.model";
+import {findAllRecipes} from "../services/store-functions/find-all-recipes";
 
 interface RecipesPros {
     recipes: RecipeModel[]
@@ -21,7 +21,7 @@ const Recipes: NextPage<RecipesPros> = ({recipes}) => {
 };
 
 export const getStaticProps: GetStaticProps = async () => {
-    const recipes = await getRecipes();
+    const recipes = await findAllRecipes();
     return {
         props: {
             recipes,

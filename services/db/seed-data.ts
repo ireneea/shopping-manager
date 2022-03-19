@@ -1,10 +1,7 @@
-/**
- * TODO: get the data from a database or an API
- */
-import {RecipeModel} from "./recipe.model";
+import {StoreModel} from "../models/store.model";
 
-export const getRecipes = async (): Promise<RecipeModel[]> => {
-    return [
+export const seedData: StoreModel = {
+    recipes: [
         {
             id: "8059fc9f-23c4-4f94-9bb6-6daea5feb644",
             name: "Harrisa Burgul Bake"
@@ -50,4 +47,4 @@ export const getRecipes = async (): Promise<RecipeModel[]> => {
             name: "Moules Frittes",
         },
     ]
-};
+}
