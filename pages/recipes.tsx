@@ -5,6 +5,7 @@ import {RecipeModel} from "../store/models/recipe.model";
 import {findAllRecipes} from "../store/store-functions/find-all-recipes";
 import {AddRecipeForm} from "../components/AddRecipeForm/AddRecipeForm";
 import {useRouter} from "next/router";
+import {RecipeList} from "../components/RecipeList/RecipeList";
 
 interface RecipesPros {
     recipes: RecipeModel[]
@@ -34,17 +35,14 @@ const Recipes: NextPage<RecipesPros> = ({recipes}) => {
     return (
         <PageLayout pageTitle="Recipes">
             <AddRecipeForm onFormSubmit={onAddRecipe}/>
-            <ul>
-                {recipes.map(recipe => (
-                    <li key={recipe.id}>{recipe.name}</li>
-                ))}
-            </ul>
+            <RecipeList recipes={recipes} />
         </PageLayout>
     )
 };
 
 export const getStaticProps: GetStaticProps = async () => {
     const recipes = await findAllRecipes();
+    // TODO: handle fetch error
     return {
         props: {
             recipes,
