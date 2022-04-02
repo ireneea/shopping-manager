@@ -42,6 +42,7 @@ const Recipes: NextPage<RecipesPros> = ({recipes}) => {
 
 export const getStaticProps: GetStaticProps = async () => {
     const recipes = await findAllRecipes();
+    // TODO: handle fetch error
     return {
         props: {
             recipes,

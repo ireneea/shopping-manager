@@ -6,7 +6,7 @@ interface AddRecipeFormProps {
 
 
 export const AddRecipeForm = ({onFormSubmit}: AddRecipeFormProps) => {
-    const [recipeName, setRecipeName] = useState("");
+    const [recipeName, setRecipeName] = useState<string>("");
 
     const handleRecipeNameChange: ChangeEventHandler<HTMLInputElement> = (event) => {
         // TODO: clear submission feedback message
