@@ -14,10 +14,6 @@ interface RecipesPros {
 const Recipes: NextPage<RecipesPros> = ({recipes}) => {
     const router = useRouter();
 
-    const refreshData = async () => {
-        await router.replace((router.asPath));
-    }
-
     const onAddRecipe = async (recipeName: string) => {
         const response = await fetch("/api/recipe", {
             method: "POST",
@@ -28,7 +24,7 @@ const Recipes: NextPage<RecipesPros> = ({recipes}) => {
         });
 
         if (response.status < 300) {
-            refreshData();
+            await router.replace((router.asPath));
         }
     };
 
