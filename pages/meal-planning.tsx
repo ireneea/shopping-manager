@@ -4,7 +4,13 @@ import {ChangeEventHandler, MouseEventHandler, useEffect, useState} from "react"
 import {RecipeList} from "../components/RecipeList/RecipeList";
 import {findAllRecipes} from "../store/store-functions/find-all-recipes";
 import {RecipeModel} from "../store/models/recipe.model";
+import {useRouter} from "next/router";
 
+interface MealPlanRecipe {
+    id: string;
+    recipeId: string;
+    name: string;
+}
 interface MealPlanningPros {
     recipes: RecipeModel[];
 }
@@ -12,10 +18,11 @@ interface MealPlanningPros {
 const MAX_SEARCH_RESULT = 5;
 
 const MealPlanning: NextPage<MealPlanningPros> = ({recipes}) => {
-    const [planRecipes, setPlanRecipes] = useState<RecipeModel[]>([]);
+    const [planRecipes, setPlanRecipes] = useState<MealPlanRecipe[]>([]);
     const [searchResult, setSearchResult] = useState<RecipeModel[]>([]);
     const [searchText, setSearchText] = useState<string>("");
-    const [selectedRecipe, setSelectedRecipe] = useState<RecipeModel | undefined>()
+    const [selectedRecipe, setSelectedRecipe] = useState<RecipeModel | undefined>();
+    const router = useRouter();
 
     useEffect(() => {
         if (searchText) {
@@ -41,14 +48,38 @@ const MealPlanning: NextPage<MealPlanningPros> = ({recipes}) => {
         setSelectedRecipe(recipe);
     }
 
-    const onAddRecipe = (recipe: RecipeModel) => {
-        setPlanRecipes(recipes => [...recipes, recipe])
+    const onAddRecipeToPlan = (recipe: RecipeModel) => {
+        const mealRecipe: MealPlanRecipe = { id: `${Date.now()}`, name: recipe.name, recipeId: recipe.id}
+        setPlanRecipes(recipes => [...recipes, mealRecipe])
+    }
+
+    const onCreateRecipe = async (recipeName: string) => {
+        const response = await fetch("/api/recipe", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({name: recipeName})
+        });
+
+        if (response.status < 300) {
+            await router.replace((router.asPath));
+            const addedRecipe: RecipeModel = await response.json()
+            setSelectedRecipe(addedRecipe);
+        } else {
+            // TODO: handle error
+        }
+    }
+
+    const canShowCreateRecipeButton = () => {
+      return searchText && !searchResult.length
     }
 
     return (
         <PageLayout pageTitle="Meal Planning">
             <h2>Search Recipe</h2>
             <input id="recipe-search" type="string" value={searchText} onChange={handleSearchTextChange}/>
+            {canShowCreateRecipeButton() && <button onClick={() => onCreateRecipe(searchText)}>Create Recipe</button>}
             <ul>
                 {searchResult.map(recipe => (
                     <li key={recipe.id}>
@@ -62,7 +93,7 @@ const MealPlanning: NextPage<MealPlanningPros> = ({recipes}) => {
             { selectedRecipe && (
                  <div>
                      {selectedRecipe.name}
-                     <button onClick={() => onAddRecipe(selectedRecipe)}>Add</button>
+                     <button onClick={() => onAddRecipeToPlan(selectedRecipe)}>Add to meal plan</button>
                  </div>
             )}
 
