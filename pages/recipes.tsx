@@ -14,7 +14,7 @@ interface RecipesPros {
 const Recipes: NextPage<RecipesPros> = ({recipes}) => {
     const router = useRouter();
 
-    const onAddRecipe = async (recipeName: string) => {
+    const handleFormSubmit = async (recipeName: string) => {
         const response = await fetch("/api/recipe", {
             method: "POST",
             headers: {
@@ -28,11 +28,15 @@ const Recipes: NextPage<RecipesPros> = ({recipes}) => {
             await router.replace((router.asPath));
         }
     };
+    
+    const handleRecipeDelete = (recipe: RecipeModel) => {
+        // TODO: implement
+    }
 
     return (
         <PageLayout pageTitle="Recipes">
-            <AddRecipeForm onFormSubmit={onAddRecipe}/>
-            <RecipeList recipes={recipes} />
+            <AddRecipeForm onFormSubmit={handleFormSubmit}/>
+            <RecipeList recipes={recipes} onRecipeDelete={handleRecipeDelete}/>
         </PageLayout>
     )
 };
