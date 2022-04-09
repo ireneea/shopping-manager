@@ -24,6 +24,7 @@ const Recipes: NextPage<RecipesPros> = ({recipes}) => {
         });
 
         if (response.status < 300) {
+            // trigger reload of the recipes list
             await router.replace((router.asPath));
         }
     };

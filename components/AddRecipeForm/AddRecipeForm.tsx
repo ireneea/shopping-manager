@@ -36,7 +36,7 @@ export const AddRecipeForm = ({onFormSubmit}: AddRecipeFormProps) => {
                     value={recipeName}
                     onChange={handleRecipeNameChange}
                 />
-
+                {' '}
                 <button type="submit">
                     Add Recipe
                 </button>

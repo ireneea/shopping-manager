@@ -1,6 +1,6 @@
 import {GetStaticProps, NextPage} from "next";
 import PageLayout from "../components/PageLayout/PageLayout";
-import {ChangeEventHandler, MouseEventHandler, useEffect, useState} from "react";
+import {ChangeEventHandler, useEffect, useState} from "react";
 import {RecipeList} from "../components/RecipeList/RecipeList";
 import {findAllRecipes} from "../store/store-functions/find-all-recipes";
 import {RecipeModel} from "../store/models/recipe.model";
@@ -21,13 +21,12 @@ const MealPlanning: NextPage<MealPlanningPros> = ({recipes}) => {
     const [planRecipes, setPlanRecipes] = useState<MealPlanRecipe[]>([]);
     const [searchResult, setSearchResult] = useState<RecipeModel[]>([]);
     const [searchText, setSearchText] = useState<string>("");
-    const [selectedRecipe, setSelectedRecipe] = useState<RecipeModel | undefined>();
     const router = useRouter();
 
     useEffect(() => {
         if (searchText) {
             const matchingRecipes = recipes
-                .filter(recipe => recipe.name.toLowerCase().includes(searchText))
+                .filter(recipe => recipe.name.toLowerCase().includes(searchText.toLowerCase()))
             if (matchingRecipes.length > MAX_SEARCH_RESULT) {
                 setSearchResult(matchingRecipes.slice(0, MAX_SEARCH_RESULT))
             } else {
@@ -43,12 +42,9 @@ const MealPlanning: NextPage<MealPlanningPros> = ({recipes}) => {
         setSearchText(event.target.value)
     }
 
-    const onRecipeSelected = (recipe: RecipeModel) => {
-        setSearchText("")
-        setSelectedRecipe(recipe);
-    }
 
     const onAddRecipeToPlan = (recipe: RecipeModel) => {
+        setSearchText("")
         const mealRecipe: MealPlanRecipe = { id: `${Date.now()}`, name: recipe.name, recipeId: recipe.id}
         setPlanRecipes(recipes => [...recipes, mealRecipe])
     }
@@ -65,7 +61,7 @@ const MealPlanning: NextPage<MealPlanningPros> = ({recipes}) => {
         if (response.status < 300) {
             await router.replace((router.asPath));
             const addedRecipe: RecipeModel = await response.json()
-            setSelectedRecipe(addedRecipe);
+            onAddRecipeToPlan(addedRecipe);
         } else {
             // TODO: handle error
         }
@@ -79,23 +75,22 @@ const MealPlanning: NextPage<MealPlanningPros> = ({recipes}) => {
         <PageLayout pageTitle="Meal Planning">
             <h2>Search Recipe</h2>
             <input id="recipe-search" type="string" value={searchText} onChange={handleSearchTextChange}/>
-            {canShowCreateRecipeButton() && <button onClick={() => onCreateRecipe(searchText)}>Create Recipe</button>}
+            {canShowCreateRecipeButton() && (
+                <>
+                    {' '}
+                    <button onClick={() => onCreateRecipe(searchText)}>Create Recipe</button>
+                </>
+            )}
+
             <ul>
                 {searchResult.map(recipe => (
                     <li key={recipe.id}>
                         {recipe.name}
-                        <button onClick={() => onRecipeSelected(recipe)}>Select</button>
+                        {' '}
+                        <button onClick={() => onAddRecipeToPlan(recipe)}>Add to meal plan</button>
                     </li>
                 ))}
             </ul>
-
-            <h2>Selected Recipe</h2>
-            { selectedRecipe && (
-                 <div>
-                     {selectedRecipe.name}
-                     <button onClick={() => onAddRecipeToPlan(selectedRecipe)}>Add to meal plan</button>
-                 </div>
-            )}
 
             <h2>Meal Plan</h2>
             <RecipeList recipes={planRecipes}/>
