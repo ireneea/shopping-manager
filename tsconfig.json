@@ -16,13 +16,9 @@
     "incremental": true,
     "baseUrl": ".",
     "paths": {
-      "@components/*": ["components/*"],
       "@components": ["components"],
       "@libs/*": ["libs/*"],
-      "@libs": ["libs"],
       "@services/*": ["services/*"],
-      "@services": ["services"],
-      "@store/*": ["store/*"],
       "@store": ["store"]
     }
   },

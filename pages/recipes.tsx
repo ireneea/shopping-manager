@@ -1,11 +1,8 @@
 import {NextPage, GetStaticProps} from "next";
-
-import PageLayout from "../components/PageLayout/PageLayout";
-import {RecipeModel} from "../store/models/recipe.model";
-import {findAllRecipes} from "../store/store-functions";
-import {AddRecipeForm} from "../components/AddRecipeForm/AddRecipeForm";
 import {useRouter} from "next/router";
-import {RecipeList} from "../components/RecipeList/RecipeList";
+
+import {RecipeModel, findAllRecipes} from "@store";
+import {AddRecipeForm, PageLayout, RecipeList} from "@components";
 
 interface RecipesPros {
     recipes: RecipeModel[]

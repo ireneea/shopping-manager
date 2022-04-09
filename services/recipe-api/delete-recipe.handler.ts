@@ -1,7 +1,7 @@
 import {NextApiRequest, NextApiResponse} from "next";
 import {DeleteRecipeResponse} from "./delete-recipe.response";
-import {ApiError} from "../../libs/api-utils";
-import {deleteRecipe} from "../../store/store-functions";
+import {ApiError} from "@libs/api-utils";
+import {deleteRecipe} from "@store";
 
 export const deleteRecipeHandler = async (req: NextApiRequest, res: NextApiResponse<DeleteRecipeResponse | ApiError>) => {
     try {
