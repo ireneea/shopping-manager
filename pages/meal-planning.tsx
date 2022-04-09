@@ -2,7 +2,7 @@ import {GetStaticProps, NextPage} from "next";
 import PageLayout from "../components/PageLayout/PageLayout";
 import {ChangeEventHandler, useEffect, useState} from "react";
 import {RecipeList} from "../components/RecipeList/RecipeList";
-import {findAllRecipes} from "../store/store-functions/find-all-recipes";
+import {findAllRecipes} from "../store/store-functions";
 import {RecipeModel} from "../store/models/recipe.model";
 import {useRouter} from "next/router";
 
@@ -50,7 +50,7 @@ const MealPlanning: NextPage<MealPlanningPros> = ({recipes}) => {
     }
 
     const onCreateRecipe = async (recipeName: string) => {
-        const response = await fetch("/api/recipe", {
+        const response = await fetch("/api/recipes", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"

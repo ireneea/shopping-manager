@@ -1,6 +1,6 @@
 import {randomUUID} from "crypto";
 
-import {AddRecipeInput} from "./add-recipe-input";
+import {AddRecipeInput} from "./add-recipe.input";
 import {RecipeModel} from "../models/recipe.model";
 import {getDb} from "../db/get-db";
 
