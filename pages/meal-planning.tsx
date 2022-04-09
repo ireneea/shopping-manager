@@ -1,10 +1,9 @@
 import {GetStaticProps, NextPage} from "next";
-import PageLayout from "../components/PageLayout/PageLayout";
 import {ChangeEventHandler, useEffect, useState} from "react";
-import {RecipeList} from "../components/RecipeList/RecipeList";
-import {findAllRecipes} from "../store/store-functions";
-import {RecipeModel} from "../store/models/recipe.model";
 import {useRouter} from "next/router";
+
+import {RecipeList, PageLayout} from "@components";
+import {findAllRecipes,RecipeModel} from "@store";
 
 interface MealPlanRecipe {
     id: string;

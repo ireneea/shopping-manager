@@ -1,7 +1,6 @@
 import {NextApiRequest, NextApiResponse} from "next";
-import {RecipeModel} from "../../store/models/recipe.model";
-import {ApiError} from "../../libs/api-utils";
-import {addRecipe, AddRecipeInput} from "../../store/store-functions";
+import {addRecipe, AddRecipeInput, RecipeModel} from "@store";
+import {ApiError} from "@libs/api-utils";
 
 export const addRecipeHandler = async (req: NextApiRequest, res: NextApiResponse<RecipeModel | ApiError>) => {
     try {

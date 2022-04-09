@@ -11,7 +11,7 @@ type PageLayoutPros = {
     children: React.ReactNode;
 }
 
-export default function PageLayout({pageTitle, children, isHomePage = false}: PageLayoutPros) {
+export const PageLayout = ({pageTitle, children, isHomePage = false}: PageLayoutPros) => {
     return (
         <>
             <Head>

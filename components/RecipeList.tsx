@@ -1,4 +1,4 @@
-import {RecipeModel} from "../../store/models/recipe.model";
+import {RecipeModel} from "@store";
 
 interface RecipeListProps {
     recipes: RecipeModel[];

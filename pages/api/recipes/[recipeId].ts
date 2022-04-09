@@ -1,6 +1,6 @@
 import {NextApiRequest, NextApiResponse} from "next";
-import {ApiError, HttpMethod} from "../../../libs/api-utils";
-import {DeleteRecipeResponse, deleteRecipeHandler} from "../../../services/recipe-api";
+import {ApiError, HttpMethod} from '@libs/api-utils';
+import {DeleteRecipeResponse, deleteRecipeHandler} from "@services/recipe-api";
 
 const recipeController = async (req: NextApiRequest, res: NextApiResponse<DeleteRecipeResponse | ApiError>) => {
     switch (req.method) {
