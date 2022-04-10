@@ -30,8 +30,8 @@ const Recipes: NextPage<RecipesPros> = ({recipes}) => {
         }
     };
     
-    const handleRecipeDelete = async (recipe: RecipeModel) => {
-        const response = await fetch(`/api/recipes/${recipe.id}`, {
+    const handleRecipeDelete = async (recipeId: string) => {
+        const response = await fetch(`/api/recipes/${recipeId}`, {
             method: "DELETE",
             ...API_HEADER
         });

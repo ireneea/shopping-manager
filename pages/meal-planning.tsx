@@ -5,11 +5,12 @@ import {useRouter} from "next/router";
 import {RecipeList, PageLayout} from "@components";
 import {findAllRecipes,RecipeModel} from "@store";
 
-interface MealPlanRecipe {
+export interface MealPlanRecipe {
     id: string;
     recipeId: string;
     name: string;
 }
+
 interface MealPlanningPros {
     recipes: RecipeModel[];
 }
@@ -66,6 +67,10 @@ const MealPlanning: NextPage<MealPlanningPros> = ({recipes}) => {
         }
     }
 
+    const handleRecipeDelete = (recipeId: string) => {
+        console.log("delete")
+    }
+
     const canShowCreateRecipeButton = () => {
       return searchText && !searchResult.length
     }
@@ -92,7 +97,7 @@ const MealPlanning: NextPage<MealPlanningPros> = ({recipes}) => {
             </ul>
 
             <h2>Meal Plan</h2>
-            <RecipeList recipes={planRecipes}/>
+            <RecipeList recipes={planRecipes} onRecipeDelete={handleRecipeDelete}/>
         </PageLayout>
     )
 }
