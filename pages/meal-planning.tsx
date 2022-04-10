@@ -68,7 +68,7 @@ const MealPlanning: NextPage<MealPlanningPros> = ({recipes}) => {
     }
 
     const handleRecipeDelete = (recipeId: string) => {
-        console.log("delete")
+       setPlanRecipes(recipes => recipes.filter(r => r.id !== recipeId));
     }
 
     const canShowCreateRecipeButton = () => {
