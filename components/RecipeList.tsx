@@ -2,7 +2,7 @@ import {RecipeModel} from "@store";
 
 interface RecipeListProps {
     recipes: RecipeModel[];
-    onRecipeDelete?: (recipe: RecipeModel) => any;
+    onRecipeDelete?: (recipeId: string) => any;
 }
 
 
@@ -15,7 +15,7 @@ export const RecipeList = ({ recipes, onRecipeDelete }: RecipeListProps) => {
                     {' '}
                     {
                         onRecipeDelete &&
-                        <button onClick={() => onRecipeDelete && onRecipeDelete(recipe)}>Delete</button>
+                        <button onClick={() => onRecipeDelete && onRecipeDelete(recipe.id)}>Delete</button>
                     }
                 </li>
             ))}
