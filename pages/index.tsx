@@ -86,7 +86,7 @@ const Home: NextPage<HomePagePros> = ({ recipes}) => {
             <RecipeSearch
                 recipes={recipes}
                 onRecipeCreate={handleRecipeCreate}
-                onSearchResultSelect={handleRecipeAddToPlan}
+                onRecipeSelect={handleRecipeAddToPlan}
             />
 
             <div>

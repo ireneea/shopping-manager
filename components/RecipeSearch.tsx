@@ -7,10 +7,10 @@ interface AddRecipeFormProps {
     onRecipeCreate?: (recipeName: string) => Promise<any>
     recipes: RecipeModel[]
     maxSearchResult?: number;
-    onSearchResultSelect?: (recipe: RecipeModel) => any
+    onRecipeSelect?: (recipe: RecipeModel) => any
 }
 
-export const RecipeSearch = ({onRecipeCreate, recipes, maxSearchResult = DEFAULT_MAX_SEARCH_RESULT, onSearchResultSelect}: AddRecipeFormProps) => {
+export const RecipeSearch = ({onRecipeCreate, recipes, maxSearchResult = DEFAULT_MAX_SEARCH_RESULT, onRecipeSelect}: AddRecipeFormProps) => {
     const [searchText, setSearchText] = useState<string>("");
     const [searchResult, setSearchResult] = useState<RecipeModel[]>([]);
 
@@ -41,7 +41,7 @@ export const RecipeSearch = ({onRecipeCreate, recipes, maxSearchResult = DEFAULT
 
     const handleSearchSelect = (recipe: RecipeModel) => {
         setSearchText("")
-        onSearchResultSelect && onSearchResultSelect(recipe)
+        onRecipeSelect && onRecipeSelect(recipe)
     }
 
     const isCreateButtonDisabled = () => {
@@ -71,7 +71,7 @@ export const RecipeSearch = ({onRecipeCreate, recipes, maxSearchResult = DEFAULT
                 {searchResult.map(recipe => (
                     <li key={recipe.id}>
                         {recipe.name}
-                        {onSearchResultSelect && (
+                        {onRecipeSelect && (
                             <>
                                 {' '}
                                 <button onClick={() => handleSearchSelect(recipe)}>
