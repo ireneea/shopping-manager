@@ -12,11 +12,12 @@ export const RecipeList = ({ recipes, onRecipeDelete }: RecipeListProps) => {
             {recipes.map(recipe => (
                 <li key={recipe.id}>
                     {recipe.name}
-                    {' '}
-                    {
-                        onRecipeDelete &&
-                        <button onClick={() => onRecipeDelete && onRecipeDelete(recipe.id)}>Delete</button>
-                    }
+                    {onRecipeDelete && (
+                        <>
+                            {' '}
+                            <button onClick={() => onRecipeDelete && onRecipeDelete(recipe.id)}>Delete</button>
+                        </>
+                    )}
                 </li>
             ))}
         </ul>

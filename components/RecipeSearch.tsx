@@ -7,7 +7,7 @@ interface AddRecipeFormProps {
     onRecipeCreate?: (recipeName: string) => Promise<any>
     recipes: RecipeModel[]
     maxSearchResult?: number;
-    onSearchResultSelect?: (recipe: RecipeModel) => {}
+    onSearchResultSelect?: (recipe: RecipeModel) => any
 }
 
 export const RecipeSearch = ({onRecipeCreate, recipes, maxSearchResult = DEFAULT_MAX_SEARCH_RESULT, onSearchResultSelect}: AddRecipeFormProps) => {

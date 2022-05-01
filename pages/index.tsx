@@ -36,17 +36,22 @@ const Home: NextPage<HomePagePros> = ({ recipes}) => {
         }
     };
 
-    const addRecipeToPlan = (recipe: RecipeModel) => {
-        const mealRecipe: MealPlanRecipe = { id: `${Date.now()}`, name: recipe.name, recipeId: recipe.id}
-        setPlanRecipes(recipes => [...recipes, mealRecipe])
+    const handleRecipeAddToPlan = (recipe: RecipeModel) => {
+        addRecipeToPlan(recipe)
     }
+
 
     const handleRecipeDelete = async (recipeId: string) => {
         await deleteRecipe(recipeId)
     }
 
-    const handleRecipeDeleteFromPlan = () => (recipeId: string) => {
+    const handleRecipeDeleteFromPlan = (recipeId: string) => {
         setPlanRecipes(recipes => recipes.filter(r => r.id !== recipeId));
+    }
+
+    const addRecipeToPlan = (recipe: RecipeModel) => {
+        const mealRecipe: MealPlanRecipe = { id: `${Date.now()}`, name: recipe.name, recipeId: recipe.id}
+        setPlanRecipes(recipes => [...recipes, mealRecipe])
     }
 
     const createRecipe = async (recipeName: string) => {
@@ -81,6 +86,7 @@ const Home: NextPage<HomePagePros> = ({ recipes}) => {
             <RecipeSearch
                 recipes={recipes}
                 onRecipeCreate={handleRecipeCreate}
+                onSearchResultSelect={handleRecipeAddToPlan}
             />
 
             <div>
