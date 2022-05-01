@@ -3,7 +3,7 @@ import {RecipeModel} from "@store";
 interface RecipeListProps {
     recipes: RecipeModel[];
     onRecipeDelete?: (recipeId: string) => any;
-    onRecipeSelect?: (recipe: RecipeModel) => any
+    onRecipeSelect?: (recipe: RecipeModel) => any;
 }
 
 

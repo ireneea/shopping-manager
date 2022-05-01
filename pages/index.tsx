@@ -4,7 +4,7 @@ import {PageLayout, RecipeList, RecipeSearch} from "@components";
 import {GetStaticProps} from "next";
 import {findAllRecipes, RecipeModel} from "@store";
 import {useRouter} from "next/router";
-import {useState} from "react";
+import {useEffect, useState} from "react";
 
 interface HomePagePros {
     recipes: RecipeModel[]
@@ -27,6 +27,21 @@ const Home: NextPage<HomePagePros> = ({ recipes}) => {
     const router = useRouter();
 
     const [planRecipes, setPlanRecipes] = useState<MealPlanRecipe[]>([]);
+    const [searchText, setSearchText] = useState<string>("");
+
+    const [filteredRecipes, setFilteredRecipes] = useState<RecipeModel[]>(recipes);
+
+    useEffect(() => {
+        if (searchText) {
+            const matchingRecipes = recipes
+                .filter(recipe => recipe.name.toLowerCase().includes(searchText.toLowerCase()))
+            setFilteredRecipes(matchingRecipes)
+        } else {
+            setFilteredRecipes(recipes)
+        }
+    }, [searchText])
+
+
 
     const handleRecipeCreate = async (recipeName: string) => {
         const addedRecipe = await createRecipe(recipeName);
@@ -83,11 +98,7 @@ const Home: NextPage<HomePagePros> = ({ recipes}) => {
 
     return (
         <PageLayout pageTitle="Shopping Manager" isHomePage>
-            <RecipeSearch
-                recipes={recipes}
-                onRecipeCreate={handleRecipeCreate}
-                onRecipeSelect={handleRecipeAddToPlan}
-            />
+
 
             <div>
                 <h2>Meal Plan</h2>
@@ -99,8 +110,14 @@ const Home: NextPage<HomePagePros> = ({ recipes}) => {
 
             <div>
                 <h2>Recipes</h2>
+
+                <RecipeSearch
+                    onRecipeCreate={handleRecipeCreate}
+                    onSearchTextChange={setSearchText}
+                />
+
                 <RecipeList
-                    recipes={recipes}
+                    recipes={filteredRecipes}
                     onRecipeSelect={handleRecipeAddToPlan}
                     onRecipeDelete={handleRecipeDelete}
                 />
