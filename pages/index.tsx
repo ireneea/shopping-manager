@@ -1,10 +1,10 @@
 import type {NextPage} from 'next'
 
-import { PageLayout, RecipeList} from "@components";
+import {PageLayout, RecipeList, RecipeSearch} from "@components";
 import {GetStaticProps} from "next";
 import {findAllRecipes, RecipeModel} from "@store";
 import {useRouter} from "next/router";
-import {ChangeEventHandler, useEffect, useState} from "react";
+import {useState} from "react";
 
 interface HomePagePros {
     recipes: RecipeModel[]
@@ -22,50 +22,19 @@ export interface MealPlanRecipe {
     name: string;
 }
 
-const MAX_SEARCH_RESULT = 5;
-
 const Home: NextPage<HomePagePros> = ({ recipes}) => {
 
     const router = useRouter();
 
     const [planRecipes, setPlanRecipes] = useState<MealPlanRecipe[]>([]);
-    const [searchResult, setSearchResult] = useState<RecipeModel[]>([]);
-    const [searchText, setSearchText] = useState<string>("");
-
-
-    useEffect(() => {
-        if (searchText) {
-            const matchingRecipes = recipes
-                .filter(recipe => recipe.name.toLowerCase().includes(searchText.toLowerCase()))
-            if (matchingRecipes.length > MAX_SEARCH_RESULT) {
-                setSearchResult(matchingRecipes.slice(0, MAX_SEARCH_RESULT))
-            } else {
-                setSearchResult(matchingRecipes)
-            }
-        } else {
-            setSearchResult([])
-        }
-    }, [searchText])
-
 
     const handleRecipeCreate = async (recipeName: string) => {
-        setSearchText("");
         const addedRecipe = await createRecipe(recipeName);
 
         if (addedRecipe) {
             addRecipeToPlan(addedRecipe)
         }
     };
-
-    const handleRecipeAddToPlan = (recipe: RecipeModel) => {
-        setSearchText("")
-        addRecipeToPlan(recipe)
-    }
-
-    const handleSearchTextChange: ChangeEventHandler<HTMLInputElement> = (event) => {
-        event.preventDefault();
-        setSearchText(event.target.value)
-    }
 
     const addRecipeToPlan = (recipe: RecipeModel) => {
         const mealRecipe: MealPlanRecipe = { id: `${Date.now()}`, name: recipe.name, recipeId: recipe.id}
@@ -90,8 +59,7 @@ const Home: NextPage<HomePagePros> = ({ recipes}) => {
         if (response.status < 300) {
             // trigger reload of the recipes list
             await router.replace((router.asPath));
-            const addedRecipe: RecipeModel = await response.json();
-            return addedRecipe;
+            return await response.json() as RecipeModel;
         }
     };
 
@@ -104,34 +72,16 @@ const Home: NextPage<HomePagePros> = ({ recipes}) => {
         if (response.status < 300) {
             // trigger reload of the recipes list
             await router.replace((router.asPath));
+            return await response.json();
         }
-    }
-
-    const canShowCreateRecipeButton = () => {
-        return searchText && !searchResult.length
     }
 
     return (
         <PageLayout pageTitle="Shopping Manager" isHomePage>
-            <div>
-                <input id="recipe-search" type="string" value={searchText} onChange={handleSearchTextChange}/>
-                {canShowCreateRecipeButton() && (
-                    <>
-                        {' '}
-                        <button onClick={() => handleRecipeCreate(searchText)}>Create Recipe</button>
-                    </>
-                )}
-
-                <ul>
-                    {searchResult.map(recipe => (
-                        <li key={recipe.id}>
-                            {recipe.name}
-                            {' '}
-                            <button onClick={() => handleRecipeAddToPlan(recipe)}>Add to meal plan</button>
-                        </li>
-                    ))}
-                </ul>
-            </div>
+            <RecipeSearch
+                recipes={recipes}
+                onRecipeCreate={handleRecipeCreate}
+            />
 
             <div>
                 <h2>Meal Plan</h2>
@@ -148,7 +98,6 @@ const Home: NextPage<HomePagePros> = ({ recipes}) => {
 
 export const getStaticProps: GetStaticProps = async () => {
     const recipes = await findAllRecipes();
-    // TODO: handle fetch error
     return {
         props: {
             recipes,
