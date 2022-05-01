@@ -91,12 +91,19 @@ const Home: NextPage<HomePagePros> = ({ recipes}) => {
 
             <div>
                 <h2>Meal Plan</h2>
-                <RecipeList recipes={planRecipes} onRecipeDelete={handleRecipeDeleteFromPlan}/>
+                <RecipeList
+                    recipes={planRecipes}
+                    onRecipeDelete={handleRecipeDeleteFromPlan}
+                />
             </div>
 
             <div>
                 <h2>Recipes</h2>
-                <RecipeList recipes={recipes} onRecipeDelete={handleRecipeDelete}/>
+                <RecipeList
+                    recipes={recipes}
+                    onRecipeSelect={handleRecipeAddToPlan}
+                    onRecipeDelete={handleRecipeDelete}
+                />
             </div>
         </PageLayout>
     )
