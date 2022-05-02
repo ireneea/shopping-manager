@@ -1,4 +1,4 @@
-import {getDb} from "../db/get-db";
+import {getDb} from "../../db/get-db";
 
 export const deleteRecipe = async (recipeId: string) => {
     const db = await getDb();

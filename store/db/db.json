@@ -112,5 +112,23 @@
       "id": "034d0eff-42fb-45ba-a499-0707771ac5ab",
       "name": "Splendid seed and feta salad"
     }
+  ],
+  "mealPlans": [
+    {
+      "id": "A04B2C78-6CA9-41FF-A0D2-68FCFD28C6A6",
+      "name": "My Plan",
+      "recipes": [
+        {
+          "id": "E47CF218-4985-46B9-B548-BBB6D9010590",
+          "recipeId": "8059fc9f-23c4-4f94-9bb6-6daea5feb644",
+          "name": "Harrisa Burgul Bake"
+        },
+        {
+          "id": "F5E121EA-66AE-403C-B25C-65888D9C4D75",
+          "recipeId": "2c06acbd-c79c-470c-81f3-546970d1c3b0",
+          "name": "Moules Frittes"
+        }
+      ]
+    }
   ]
 }

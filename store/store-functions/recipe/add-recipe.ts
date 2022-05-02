@@ -1,8 +1,8 @@
 import {randomUUID} from "crypto";
 
 import {AddRecipeInput} from "./add-recipe.input";
-import {RecipeModel} from "../models/recipe.model";
-import {getDb} from "../db/get-db";
+import {RecipeModel} from "../../models/recipe.model";
+import {getDb} from "../../db/get-db";
 
 export const addRecipe = async (input: AddRecipeInput) => {
     const newRecipe: RecipeModel = {

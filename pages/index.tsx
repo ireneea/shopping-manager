@@ -4,31 +4,24 @@ import {GetStaticProps} from "next";
 import {useRouter} from "next/router";
 import {useEffect, useState} from "react";
 
-import {findAllRecipes, RecipeModel} from "@store";
+import {findAllMealPlans, findAllRecipes, MealPlanRecipeModel, RecipeModel, MealPlanModel} from "@store";
+import {recipeApiClient} from "@services/recipe-api-client";
 import {
     PageLayout,
     RecipeList,
     RecipeSearchInput,
     RecipeCreateButton
 } from "@components";
-import {recipeApiClient} from "@services/recipe-api-client";
-
 
 interface HomePagePros {
-    recipes: RecipeModel[]
+    recipes: RecipeModel[],
+    mealPlan: MealPlanModel
 }
 
-export interface MealPlanRecipe {
-    id: string;
-    recipeId: string;
-    name: string;
-}
-
-const Home: NextPage<HomePagePros> = ({ recipes}) => {
-
+const Home: NextPage<HomePagePros> = ({ recipes, mealPlan}) => {
     const router = useRouter();
 
-    const [planRecipes, setPlanRecipes] = useState<MealPlanRecipe[]>([]);
+    const [planRecipes, setPlanRecipes] = useState<MealPlanRecipeModel[]>(mealPlan.recipes);
     const [searchText, setSearchText] = useState<string>("");
 
     const [filteredRecipes, setFilteredRecipes] = useState<RecipeModel[]>(recipes);
@@ -45,7 +38,6 @@ const Home: NextPage<HomePagePros> = ({ recipes}) => {
 
     const handleRecipeCreate = async () => {
         if (searchText) {
-
             const addedRecipe = await recipeApiClient.createRecipe(searchText);
             addedRecipe && addRecipeToPlan(addedRecipe);
             setSearchText("");
@@ -54,13 +46,13 @@ const Home: NextPage<HomePagePros> = ({ recipes}) => {
         }
     };
 
-    const handleRecipeAddToPlan = (recipe: RecipeModel) => {
-        addRecipeToPlan(recipe)
-    }
-
     const handleRecipeDelete = async (recipeId: string) => {
         await recipeApiClient.deleteRecipe(recipeId);
         await router.replace((router.asPath));
+    }
+
+    const handleRecipeAddToPlan = (recipe: RecipeModel) => {
+        addRecipeToPlan(recipe)
     }
 
     const handleRecipeDeleteFromPlan = (recipeId: string) => {
@@ -68,7 +60,7 @@ const Home: NextPage<HomePagePros> = ({ recipes}) => {
     }
 
     const addRecipeToPlan = (recipe: RecipeModel) => {
-        const mealRecipe: MealPlanRecipe = { id: `${Date.now()}`, name: recipe.name, recipeId: recipe.id}
+        const mealRecipe: MealPlanRecipeModel = { id: `${Date.now()}`, name: recipe.name, recipeId: recipe.id}
         setPlanRecipes(recipes => [...recipes, mealRecipe])
     }
 
@@ -105,9 +97,11 @@ const Home: NextPage<HomePagePros> = ({ recipes}) => {
 
 export const getStaticProps: GetStaticProps = async () => {
     const recipes = await findAllRecipes();
+    const mealPlans = await findAllMealPlans();
     return {
         props: {
             recipes,
+            mealPlan: mealPlans[0]
         }
     }
 }
