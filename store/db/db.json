@@ -111,6 +111,10 @@
     {
       "id": "034d0eff-42fb-45ba-a499-0707771ac5ab",
       "name": "Splendid seed and feta salad"
+    },
+    {
+      "id": "9d33b32a-5716-4f7c-aedd-2d01dbfc9994",
+      "name": "Chicken wing"
     }
   ],
   "mealPlans": [
@@ -127,6 +131,31 @@
           "id": "F5E121EA-66AE-403C-B25C-65888D9C4D75",
           "recipeId": "2c06acbd-c79c-470c-81f3-546970d1c3b0",
           "name": "Moules Frittes"
+        },
+        {
+          "id": "b747d80a-7483-4ea8-80fa-8cbfeb937d83",
+          "recipeId": "8059fc9f-23c4-4f94-9bb6-6daea5feb644",
+          "name": "Harrisa Burgul Bake"
+        },
+        {
+          "id": "1e71b3c3-833b-47e0-abae-ea4225eb63f9",
+          "recipeId": "a8a82878-587d-41b2-8cd5-46f018a3b059",
+          "name": "Mushroom bok choy bean"
+        },
+        {
+          "id": "6229d23e-f1b1-4843-a04a-b964df514ab0",
+          "recipeId": "a8a82878-587d-41b2-8cd5-46f018a3b059",
+          "name": "Mushroom bok choy bean"
+        },
+        {
+          "id": "dc0ecc36-cee2-42ca-94ee-4debcd82935c",
+          "recipeId": "a8a82878-587d-41b2-8cd5-46f018a3b059",
+          "name": "Mushroom bok choy bean"
+        },
+        {
+          "id": "fd59df1f-fd52-4ac5-94c8-71ff7e195648",
+          "recipeId": "ea35cd72-5233-46de-8331-becec9a7a4d0",
+          "name": "Lemon pea gnocchi"
         }
       ]
     }

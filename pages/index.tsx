@@ -51,8 +51,15 @@ const Home: NextPage<HomePagePros> = ({ recipes, mealPlan}) => {
         await router.replace((router.asPath));
     }
 
-    const handleRecipeAddToPlan = (recipe: RecipeModel) => {
-        addRecipeToPlan(recipe)
+    const handleRecipeAddToPlan = async (recipe: RecipeModel) => {
+        const plan = await recipeApiClient.addRecipeToMealPlan({
+            mealPlanId: mealPlan.id,
+            recipe
+        });
+
+        if (plan) {
+            setPlanRecipes(plan.recipes);
+        }
     }
 
     const handleRecipeDeleteFromPlan = (recipeId: string) => {
