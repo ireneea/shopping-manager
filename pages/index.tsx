@@ -1,10 +1,11 @@
 import type {NextPage} from 'next'
 
-import {PageLayout, RecipeList, RecipeSearch} from "@components";
+import {PageLayout, RecipeList, RecipeSearchInput} from "@components";
 import {GetStaticProps} from "next";
 import {findAllRecipes, RecipeModel} from "@store";
 import {useRouter} from "next/router";
 import {useEffect, useState} from "react";
+import {RecipeCreateButton} from "../components/RecipeCreateButton";
 
 interface HomePagePros {
     recipes: RecipeModel[]
@@ -43,18 +44,17 @@ const Home: NextPage<HomePagePros> = ({ recipes}) => {
 
 
 
-    const handleRecipeCreate = async (recipeName: string) => {
-        const addedRecipe = await createRecipe(recipeName);
-
-        if (addedRecipe) {
-            addRecipeToPlan(addedRecipe)
+    const handleRecipeCreate = async () => {
+        if (searchText) {
+            const addedRecipe = await createRecipe(searchText);
+            addedRecipe && addRecipeToPlan(addedRecipe);
+            setSearchText("")
         }
     };
 
     const handleRecipeAddToPlan = (recipe: RecipeModel) => {
         addRecipeToPlan(recipe)
     }
-
 
     const handleRecipeDelete = async (recipeId: string) => {
         await deleteRecipe(recipeId)
@@ -96,32 +96,35 @@ const Home: NextPage<HomePagePros> = ({ recipes}) => {
         }
     }
 
+    const isCreateButtonDisabled = () => {
+        return !searchText
+    }
+
     return (
         <PageLayout pageTitle="Shopping Manager" isHomePage>
+            <RecipeList
+                recipes={planRecipes}
+                onRecipeDelete={handleRecipeDeleteFromPlan}
+            />
 
 
-            <div>
-                <h2>Meal Plan</h2>
-                <RecipeList
-                    recipes={planRecipes}
-                    onRecipeDelete={handleRecipeDeleteFromPlan}
-                />
-            </div>
 
-            <div>
-                <h2>Recipes</h2>
+            <RecipeSearchInput
+                searchText={searchText}
+                onSearchTextChange={setSearchText}
+            />
+            {' '}
+            <RecipeCreateButton
+                onRecipeCreateClick={handleRecipeCreate}
+                disabled={isCreateButtonDisabled()}
+                label={"Add To Plan"}
+            />
 
-                <RecipeSearch
-                    onRecipeCreate={handleRecipeCreate}
-                    onSearchTextChange={setSearchText}
-                />
-
-                <RecipeList
-                    recipes={filteredRecipes}
-                    onRecipeSelect={handleRecipeAddToPlan}
-                    onRecipeDelete={handleRecipeDelete}
-                />
-            </div>
+            <RecipeList
+                recipes={filteredRecipes}
+                onRecipeSelect={handleRecipeAddToPlan}
+                onRecipeDelete={handleRecipeDelete}
+            />
         </PageLayout>
     )
 }
