@@ -7,11 +7,13 @@ export const deleteRecipe = async (recipeId: string) => {
     if(db.data?.recipes) {
         recipeIndex = db.data.recipes
             .findIndex((recipe) => recipe.id === recipeId);
+
+        if (recipeIndex > -1) {
+            db.data?.recipes.splice(recipeIndex, 1);
+            await db.write();
+        }
     }
 
-    if (recipeIndex > -1) {
-        db.data?.recipes.splice(recipeIndex, 1);
-        await db.write();
-    }
+
 
 }
