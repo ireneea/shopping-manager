@@ -1,26 +1,21 @@
 import type {NextPage} from 'next'
 
 import {GetStaticProps} from "next";
-import {findAllRecipes, RecipeModel} from "@store";
 import {useRouter} from "next/router";
 import {useEffect, useState} from "react";
 
+import {findAllRecipes, RecipeModel} from "@store";
 import {
     PageLayout,
     RecipeList,
     RecipeSearchInput,
     RecipeCreateButton
 } from "@components";
+import {recipeApiClient} from "@services/recipe-api-client";
 
 
 interface HomePagePros {
     recipes: RecipeModel[]
-}
-
-const API_HEADER = {
-    headers: {
-        "Content-Type": "application/json"
-    }
 }
 
 export interface MealPlanRecipe {
@@ -48,13 +43,14 @@ const Home: NextPage<HomePagePros> = ({ recipes}) => {
         }
     }, [searchText])
 
-
-
     const handleRecipeCreate = async () => {
         if (searchText) {
-            const addedRecipe = await createRecipe(searchText);
+
+            const addedRecipe = await recipeApiClient.createRecipe(searchText);
             addedRecipe && addRecipeToPlan(addedRecipe);
-            setSearchText("")
+            setSearchText("");
+
+            await router.replace((router.asPath));
         }
     };
 
@@ -63,7 +59,8 @@ const Home: NextPage<HomePagePros> = ({ recipes}) => {
     }
 
     const handleRecipeDelete = async (recipeId: string) => {
-        await deleteRecipe(recipeId)
+        await recipeApiClient.deleteRecipe(recipeId);
+        await router.replace((router.asPath));
     }
 
     const handleRecipeDeleteFromPlan = (recipeId: string) => {
@@ -73,33 +70,6 @@ const Home: NextPage<HomePagePros> = ({ recipes}) => {
     const addRecipeToPlan = (recipe: RecipeModel) => {
         const mealRecipe: MealPlanRecipe = { id: `${Date.now()}`, name: recipe.name, recipeId: recipe.id}
         setPlanRecipes(recipes => [...recipes, mealRecipe])
-    }
-
-    const createRecipe = async (recipeName: string) => {
-        const response = await fetch("/api/recipes", {
-            method: "POST",
-            body: JSON.stringify({name: recipeName}),
-            ...API_HEADER
-        });
-
-        if (response.status < 300) {
-            // trigger reload of the recipes list
-            await router.replace((router.asPath));
-            return await response.json() as RecipeModel;
-        }
-    };
-
-    const deleteRecipe = async (recipeId: string) => {
-        const response = await fetch(`/api/recipes/${recipeId}`, {
-            method: "DELETE",
-            ...API_HEADER
-        });
-
-        if (response.status < 300) {
-            // trigger reload of the recipes list
-            await router.replace((router.asPath));
-            return await response.json();
-        }
     }
 
     const isCreateButtonDisabled = () => {
@@ -112,8 +82,6 @@ const Home: NextPage<HomePagePros> = ({ recipes}) => {
                 recipes={planRecipes}
                 onRecipeDelete={handleRecipeDeleteFromPlan}
             />
-
-
 
             <RecipeSearchInput
                 searchText={searchText}
@@ -143,6 +111,5 @@ export const getStaticProps: GetStaticProps = async () => {
         }
     }
 }
-
 
 export default Home
