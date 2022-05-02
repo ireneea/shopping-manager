@@ -1,11 +1,17 @@
 import type {NextPage} from 'next'
 
-import {PageLayout, RecipeList, RecipeSearchInput} from "@components";
 import {GetStaticProps} from "next";
 import {findAllRecipes, RecipeModel} from "@store";
 import {useRouter} from "next/router";
 import {useEffect, useState} from "react";
-import {RecipeCreateButton} from "../components/RecipeCreateButton";
+
+import {
+    PageLayout,
+    RecipeList,
+    RecipeSearchInput,
+    RecipeCreateButton
+} from "@components";
+
 
 interface HomePagePros {
     recipes: RecipeModel[]
