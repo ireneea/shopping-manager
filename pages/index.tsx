@@ -4,7 +4,7 @@ import {GetStaticProps} from "next";
 import {useRouter} from "next/router";
 import {useEffect, useState} from "react";
 
-import {findAllMealPlans, findAllRecipes, MealPlanRecipeModel, RecipeModel, MealPlanModel} from "@store";
+import {findAllMealPlans, findAllRecipes, RecipeModel, MealPlanModel} from "@store";
 import {recipeApiClient} from "@services/recipe-api-client";
 import {
     PageLayout,
@@ -21,7 +21,6 @@ interface HomePagePros {
 const Home: NextPage<HomePagePros> = ({ recipes, mealPlan}) => {
     const router = useRouter();
 
-    const [planRecipes, setPlanRecipes] = useState<MealPlanRecipeModel[]>(mealPlan.recipes);
     const [searchText, setSearchText] = useState<string>("");
 
     const [filteredRecipes, setFilteredRecipes] = useState<RecipeModel[]>(recipes);
@@ -39,10 +38,12 @@ const Home: NextPage<HomePagePros> = ({ recipes, mealPlan}) => {
     const handleRecipeCreate = async () => {
         if (searchText) {
             const addedRecipe = await recipeApiClient.createRecipe(searchText);
-            addedRecipe && addRecipeToPlan(addedRecipe);
-            setSearchText("");
 
-            await router.replace((router.asPath));
+            if (addedRecipe) {
+                await handleRecipeAddToPlan(addedRecipe);
+                setSearchText("");
+                await router.replace((router.asPath));
+            }
         }
     };
 
@@ -58,17 +59,19 @@ const Home: NextPage<HomePagePros> = ({ recipes, mealPlan}) => {
         });
 
         if (plan) {
-            setPlanRecipes(plan.recipes);
+            await router.replace((router.asPath));
         }
     }
 
-    const handleRecipeDeleteFromPlan = (recipeId: string) => {
-        setPlanRecipes(recipes => recipes.filter(r => r.id !== recipeId));
-    }
+    const handleRecipeDeleteFromPlan = async (recipeId: string) => {
+        const plan = await recipeApiClient.deleteRecipeFromMealPlan({
+            mealPlanId: mealPlan.id,
+            mealPlanRecipeId: recipeId
+        });
 
-    const addRecipeToPlan = (recipe: RecipeModel) => {
-        const mealRecipe: MealPlanRecipeModel = { id: `${Date.now()}`, name: recipe.name, recipeId: recipe.id}
-        setPlanRecipes(recipes => [...recipes, mealRecipe])
+        if (plan) {
+            await router.replace((router.asPath));
+        }
     }
 
     const isCreateButtonDisabled = () => {
@@ -78,7 +81,7 @@ const Home: NextPage<HomePagePros> = ({ recipes, mealPlan}) => {
     return (
         <PageLayout pageTitle="Shopping Manager" isHomePage>
             <RecipeList
-                recipes={planRecipes}
+                recipes={mealPlan.recipes}
                 onRecipeDelete={handleRecipeDeleteFromPlan}
             />
 

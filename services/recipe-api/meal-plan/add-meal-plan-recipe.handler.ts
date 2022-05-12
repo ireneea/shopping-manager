@@ -6,7 +6,7 @@ import {
 } from "@store";
 import {ApiError} from "@libs/api-utils";
 
-export const addRecipeToMealPlanHandler = async (req: NextApiRequest, res: NextApiResponse<MealPlanModel | ApiError>) => {
+export const addMealPlanRecipeHandler = async (req: NextApiRequest, res: NextApiResponse<MealPlanModel | ApiError>) => {
     try {
         const input = req.body as AddRecipeToMealPlanInput;
         const mealPlan = await addRecipeToMealPlan(input);

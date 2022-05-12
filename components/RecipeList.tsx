@@ -13,8 +13,6 @@ export const RecipeList = ({ recipes, onRecipeSelect, onRecipeDelete }: RecipeLi
             {recipes.map(recipe => (
                 <li key={recipe.id}>
                     {recipe.name}
-                    {' '}
-                    {recipe.id}
                     {onRecipeSelect && (
                         <>
                             {' '}
