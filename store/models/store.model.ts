@@ -1,5 +1,7 @@
 import {RecipeModel} from "./recipe.model";
+import {MealPlanModel} from "./meal-plan.model";
 
 export interface StoreModel {
-    recipes: RecipeModel[]
+    recipes: RecipeModel[];
+    mealPlans: MealPlanModel[];
 }
