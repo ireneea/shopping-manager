@@ -61,7 +61,7 @@ const Home: NextPage<HomePagePros> = ({ recipes, mealPlan }) => {
     } else {
       setFilteredRecipes(recipes);
     }
-  }, [searchText]);
+  }, [searchText, recipes]);
 
   const handleRecipeCreate = async () => {
     if (searchText) {

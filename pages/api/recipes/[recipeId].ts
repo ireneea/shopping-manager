@@ -15,7 +15,7 @@ const recipeController = async (
     default:
       return res
         .status(405)
-        .json({ error: `${req.method} method is not allowed` });
+        .json({ error: `${req.method} method is not allowed` })
   }
 };
 
