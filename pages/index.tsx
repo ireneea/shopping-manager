@@ -92,13 +92,21 @@ const Home: NextPage<HomePagePros> = ({ recipes, mealPlan}) => {
     const handleRecipeMoveUp = async (recipeId: string) => {
         const index = mealPlan.recipes.findIndex(recipe => recipe.id === recipeId);
         const recipesIds = move<MealPlanRecipeModel>(index, index - 1, mealPlan.recipes).map(r => r.id);
-        await recipeApiClient.reOrderMealPlanRecipes({mealPlanId: mealPlan.id, recipesIds});
+        const plan = await recipeApiClient.reOrderMealPlanRecipes({mealPlanId: mealPlan.id, recipesIds});
+
+        if (plan) {
+            await router.replace((router.asPath));
+        }
     }
 
     const handleRecipeMoveDown = async (recipeId: string) => {
         const index = mealPlan.recipes.findIndex(recipe => recipe.id === recipeId);
         const recipesIds = move<MealPlanRecipeModel>(index, index + 1, mealPlan.recipes).map(r => r.id);
-        await recipeApiClient.reOrderMealPlanRecipes({mealPlanId: mealPlan.id, recipesIds});
+        const plan = await recipeApiClient.reOrderMealPlanRecipes({mealPlanId: mealPlan.id, recipesIds});
+
+        if (plan) {
+            await router.replace((router.asPath));
+        }
     }
 
     const isCreateButtonDisabled = () => {
