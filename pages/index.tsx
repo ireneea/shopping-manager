@@ -74,6 +74,7 @@ const Home: NextPage<HomePagePros> = ({ recipes, mealPlan}) => {
         }
     }
 
+
     const isCreateButtonDisabled = () => {
         return !searchText
     }
@@ -83,6 +84,12 @@ const Home: NextPage<HomePagePros> = ({ recipes, mealPlan}) => {
             <RecipeList
                 recipes={mealPlan.recipes}
                 onRecipeDelete={handleRecipeDeleteFromPlan}
+                onRecipeMoveUp={(recipeId => {
+                    console.log(recipeId)
+                })}
+                onRecipeMoveDown={(recipeId => {
+                    console.log(recipeId)
+                })}
             />
 
             <RecipeSearchInput
