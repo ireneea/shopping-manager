@@ -3,6 +3,7 @@ import {ApiError} from "@libs/api-utils";
 import {findMealPlanById, MealPlanModel, MealPlanRecipeModel, updateMealPlan} from "@store";
 import {ReOrderMealPlanRecipesInput} from "./re-order-meal-plan-recipes.input";
 
+
 export const reOrderMealPlanRecipesHandler = async (req: NextApiRequest, res: NextApiResponse<MealPlanModel | ApiError>) => {
     try {
         const input = req.body as ReOrderMealPlanRecipesInput;
@@ -15,9 +16,24 @@ export const reOrderMealPlanRecipesHandler = async (req: NextApiRequest, res: Ne
                 .json({ error: `Meal plan ${mealPlanId} not found`})
         }
 
+        const recipes = recipesIds.reduce((acc, recipeId) => {
+            const recipe = mealPlan.recipes.find(r => r.id === recipeId);
+            if (recipe) {
+                return [...acc, recipe]
+            } else {
+                return acc;
+            }
+        }, [] as MealPlanRecipeModel[]);
+
+        if (recipes.length !== mealPlan.recipes.length) {
+            return res
+                .status(400)
+                .json({ error: "Cannot re-order recipes: Invalid recipesIds input"})
+        }
+
         const updatedMealPlan = await updateMealPlan({
             ...mealPlan,
-            recipes: recipesIds.map(recipeId => mealPlan.recipes.find(r => r.id === recipeId) as MealPlanRecipeModel)
+            recipes
         });
 
         if (!updatedMealPlan) {
