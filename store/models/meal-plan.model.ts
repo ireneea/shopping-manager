@@ -1,7 +1,7 @@
-import {MealPlanRecipeModel} from "./meal-plan-recipe.model";
+import { MealPlanRecipeModel } from "./meal-plan-recipe.model";
 
 export interface MealPlanModel {
-    id: string;
-    name: string;
-    recipes: MealPlanRecipeModel[]
+  id: string;
+  name: string;
+  recipes: MealPlanRecipeModel[];
 }
