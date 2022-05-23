@@ -4,7 +4,7 @@ import {GetStaticProps} from "next";
 import {useRouter} from "next/router";
 import {useEffect, useState} from "react";
 
-import {findAllMealPlans, findAllRecipes, RecipeModel, MealPlanModel} from "@store";
+import {findAllMealPlans, findAllRecipes, RecipeModel, MealPlanModel, MealPlanRecipeModel} from "@store";
 import {recipeApiClient} from "@services/recipe-api-client";
 import {
     PageLayout,
@@ -16,6 +16,21 @@ import {
 interface HomePagePros {
     recipes: RecipeModel[],
     mealPlan: MealPlanModel
+}
+
+function move<T>(from: number, to: number, arr: T[]): T[]  {
+    const isIndexValid = (index: number, arrLength: number) => index >= 0 && index < arrLength;
+
+    if (!isIndexValid(from, arr.length) || !isIndexValid(to, arr.length) || from === to) {
+        return arr;
+    }
+
+    const newArr = [...arr];
+
+    const item = newArr.splice(from, 1)[0];
+    newArr.splice(to, 0, item);
+
+    return newArr;
 }
 
 const Home: NextPage<HomePagePros> = ({ recipes, mealPlan}) => {
@@ -74,6 +89,17 @@ const Home: NextPage<HomePagePros> = ({ recipes, mealPlan}) => {
         }
     }
 
+    const handleRecipeMoveUp = async (recipeId: string) => {
+        const index = mealPlan.recipes.findIndex(recipe => recipe.id === recipeId);
+        const reorderedRecipes = move<MealPlanRecipeModel>(index, index - 1, mealPlan.recipes);
+        await recipeApiClient.reOrderMealPlanRecipes(reorderedRecipes.map(r => r.id));
+    }
+
+    const handleRecipeMoveDown = async (recipeId: string) => {
+        const index = mealPlan.recipes.findIndex(recipe => recipe.id === recipeId);
+        const reorderedRecipes = move<MealPlanRecipeModel>(index, index + 1, mealPlan.recipes);
+        await recipeApiClient.reOrderMealPlanRecipes(reorderedRecipes.map(r => r.id));
+    }
 
     const isCreateButtonDisabled = () => {
         return !searchText
@@ -84,12 +110,8 @@ const Home: NextPage<HomePagePros> = ({ recipes, mealPlan}) => {
             <RecipeList
                 recipes={mealPlan.recipes}
                 onRecipeDelete={handleRecipeDeleteFromPlan}
-                onRecipeMoveUp={(recipeId => {
-                    console.log(recipeId)
-                })}
-                onRecipeMoveDown={(recipeId => {
-                    console.log(recipeId)
-                })}
+                onRecipeMoveUp={handleRecipeMoveUp}
+                onRecipeMoveDown={handleRecipeMoveDown}
             />
 
             <RecipeSearchInput
