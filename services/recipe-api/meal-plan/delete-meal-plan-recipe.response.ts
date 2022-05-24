@@ -1,6 +1,6 @@
 export interface DeleteMealPlanRecipeResponse {
-    deleted: {
-        mealPlanId: string;
-        mealPlanRecipeId: string;
-    };
+  deleted: {
+    mealPlanId: string;
+    mealPlanRecipeId: string;
+  };
 }

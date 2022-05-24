@@ -1,3 +1,3 @@
 export interface DeleteRecipeResponse {
-    deleted: string;
+  deleted: string;
 }

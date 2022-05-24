@@ -1,4 +1,4 @@
 export interface DeleteRecipeFromMealPlanInput {
-    mealPlanId: string;
-    mealPlanRecipeId: string;
+  mealPlanId: string;
+  mealPlanRecipeId: string;
 }

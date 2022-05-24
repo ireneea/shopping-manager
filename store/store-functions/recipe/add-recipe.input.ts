@@ -1,3 +1,3 @@
 export interface AddRecipeInput {
-    name: string;
+  name: string;
 }

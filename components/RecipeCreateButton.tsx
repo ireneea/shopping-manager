@@ -1,25 +1,21 @@
-import {MouseEventHandler} from "react";
+import { MouseEventHandler } from "react";
 
 interface RecipeCreateButtonProps {
-    onRecipeCreateClick: () => any;
-    disabled?: boolean;
-    label?: string
+  onRecipeCreateClick: () => any;
+  disabled?: boolean;
+  label?: string;
 }
 
 export const RecipeCreateButton = (props: RecipeCreateButtonProps) => {
-    const {
-        label = "Create Recipe",
-        onRecipeCreateClick,
-        disabled
-    } = props;
+  const { label = "Create Recipe", onRecipeCreateClick, disabled } = props;
 
-    const handleClick: MouseEventHandler<HTMLButtonElement>=  () => {
-        onRecipeCreateClick()
-    }
+  const handleClick: MouseEventHandler<HTMLButtonElement> = () => {
+    onRecipeCreateClick();
+  };
 
-    return (
-        <button onClick={handleClick} disabled={disabled}>
-            { label }
-        </button>
-    )
-}
+  return (
+    <button onClick={handleClick} disabled={disabled}>
+      {label}
+    </button>
+  );
+};

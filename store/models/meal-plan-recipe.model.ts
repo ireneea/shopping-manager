@@ -1,5 +1,5 @@
 export interface MealPlanRecipeModel {
-    id: string;
-    recipeId: string;
-    name: string;
+  id: string;
+  recipeId: string;
+  name: string;
 }

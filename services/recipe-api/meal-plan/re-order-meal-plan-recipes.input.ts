@@ -1,4 +1,4 @@
 export interface ReOrderMealPlanRecipesInput {
-    mealPlanId: string;
-    recipesIds: string[];
+  mealPlanId: string;
+  recipesIds: string[];
 }
