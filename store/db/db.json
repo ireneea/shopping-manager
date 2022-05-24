@@ -127,11 +127,6 @@
       "name": "My Plan",
       "recipes": [
         {
-          "id": "E47CF218-4985-46B9-B548-BBB6D9010590",
-          "recipeId": "8059fc9f-23c4-4f94-9bb6-6daea5feb644",
-          "name": "Harrisa Burgul Bake"
-        },
-        {
           "id": "dc0ecc36-cee2-42ca-94ee-4debcd82935c",
           "recipeId": "a8a82878-587d-41b2-8cd5-46f018a3b059",
           "name": "Mushroom bok choy bean"
