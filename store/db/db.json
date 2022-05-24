@@ -137,11 +137,6 @@
           "name": "Moules Frittes"
         },
         {
-          "id": "2734a9e1-09f3-4732-b267-e10bcf7c91e9",
-          "recipeId": "2ab52e99-0835-41ea-b4c7-1d9c20966132",
-          "name": "Frozen Pizza"
-        },
-        {
           "id": "934dbc8b-c9b5-43c4-827f-e4041fcbd2fb",
           "recipeId": "8059fc9f-23c4-4f94-9bb6-6daea5feb644",
           "name": "Harrisa Burgul Bake"
@@ -150,6 +145,16 @@
           "id": "3f73940f-05ea-48af-a7ec-4ffa0814f429",
           "recipeId": "6cb018de-ad37-4be6-8056-a22f403b8508",
           "name": "Raclette"
+        },
+        {
+          "id": "2258923a-5f34-49db-a3d2-121da24751c6",
+          "recipeId": "18a7c22e-d3ef-4783-9e94-f4429710653b",
+          "name": "Fried Egg"
+        },
+        {
+          "id": "2734a9e1-09f3-4732-b267-e10bcf7c91e9",
+          "recipeId": "2ab52e99-0835-41ea-b4c7-1d9c20966132",
+          "name": "Frozen Pizza"
         }
       ]
     }

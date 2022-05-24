@@ -1,5 +1,4 @@
 import type { NextPage } from "next";
-
 import { GetStaticProps } from "next";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
@@ -7,16 +6,16 @@ import { useEffect, useState } from "react";
 import {
   findAllMealPlans,
   findAllRecipes,
-  RecipeModel,
   MealPlanModel,
   MealPlanRecipeModel,
+  RecipeModel,
 } from "@store";
 import { recipeApiClient } from "@services/recipe-api-client";
 import {
   PageLayout,
+  RecipeCreateButton,
   RecipeList,
   RecipeSearchInput,
-  RecipeCreateButton,
 } from "@components";
 
 interface HomePagePros {
@@ -155,7 +154,7 @@ const Home: NextPage<HomePagePros> = ({ recipes, mealPlan }) => {
       <RecipeSearchInput
         searchText={searchText}
         onSearchTextChange={setSearchText}
-      />{" "}
+      />
       <RecipeCreateButton
         onRecipeCreateClick={handleRecipeCreate}
         disabled={isCreateButtonDisabled()}

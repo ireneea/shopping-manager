@@ -14,7 +14,11 @@ export const RecipeCreateButton = (props: RecipeCreateButtonProps) => {
   };
 
   return (
-    <button onClick={handleClick} disabled={disabled}>
+    <button
+      onClick={handleClick}
+      disabled={disabled}
+      className="button success"
+    >
       {label}
     </button>
   );
