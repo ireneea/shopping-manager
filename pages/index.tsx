@@ -144,7 +144,7 @@ const Home: NextPage<HomePagePros> = ({ recipes, mealPlan }) => {
   };
 
   return (
-    <PageLayout pageTitle="Shopping Manager" isHomePage>
+    <PageLayout pageTitle="Shopping Manager">
       <RecipeList
         recipes={mealPlan.recipes}
         onRecipeDelete={handleRecipeDeleteFromPlan}

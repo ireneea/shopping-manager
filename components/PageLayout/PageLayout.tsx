@@ -1,20 +1,14 @@
 import React from "react";
 import Head from "next/head";
-import Link from "next/link";
 
 import styles from "./PageLayout.module.css";
 
 type PageLayoutPros = {
   pageTitle: string;
-  isHomePage?: boolean;
   children: React.ReactNode;
 };
 
-export const PageLayout = ({
-  pageTitle,
-  children,
-  isHomePage = false,
-}: PageLayoutPros) => {
+export const PageLayout = ({ pageTitle, children }: PageLayoutPros) => {
   return (
     <>
       <Head>
@@ -28,12 +22,6 @@ export const PageLayout = ({
         </header>
 
         <main>{children}</main>
-
-        {!isHomePage && (
-          <Link href="/">
-            <a>Back to home page</a>
-          </Link>
-        )}
       </div>
     </>
   );
