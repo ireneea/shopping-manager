@@ -16,12 +16,20 @@ export const PageLayout = ({ pageTitle, children }: PageLayoutPros) => {
         <meta name="description" content="Shopping app" />
       </Head>
 
-      <div className={styles.container}>
-        <header className={styles.header}>
-          <h1>{pageTitle}</h1>
-        </header>
+      <div className="grid-container">
+        <div className="grid-x">
+          <div className="cell">
+            <header className={styles.header}>
+              <h1>{pageTitle}</h1>
+            </header>
+          </div>
+        </div>
 
-        <main>{children}</main>
+        <div className="grid-x">
+          <div className="cell">
+            <main>{children}</main>
+          </div>
+        </div>
       </div>
     </>
   );
