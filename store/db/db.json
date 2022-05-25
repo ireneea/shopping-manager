@@ -119,6 +119,10 @@
     {
       "id": "2ab52e99-0835-41ea-b4c7-1d9c20966132",
       "name": "Frozen Pizza"
+    },
+    {
+      "id": "f1c25f0f-66b2-4b93-8e9c-9ada2b8dacb0",
+      "name": "Pasta mushroom chicken bake"
     }
   ],
   "mealPlans": [
@@ -152,9 +156,34 @@
           "name": "Fried Egg"
         },
         {
-          "id": "2734a9e1-09f3-4732-b267-e10bcf7c91e9",
-          "recipeId": "2ab52e99-0835-41ea-b4c7-1d9c20966132",
-          "name": "Frozen Pizza"
+          "id": "7e838216-6503-47db-9f0a-4908c3af3308",
+          "recipeId": "8059fc9f-23c4-4f94-9bb6-6daea5feb644",
+          "name": "Harrisa Burgul Bake"
+        },
+        {
+          "id": "3cc91f0c-8520-42e3-a348-85260f5ca545",
+          "recipeId": "f1c25f0f-66b2-4b93-8e9c-9ada2b8dacb0",
+          "name": "Pasta mushroom chicken bake"
+        },
+        {
+          "id": "f036dbcd-7e9d-4c3d-8d25-fa592a150f10",
+          "recipeId": "76d42f23-c812-4cfc-b8f1-842230c9152f",
+          "name": "Tacos"
+        },
+        {
+          "id": "531af75a-fbc9-4ef1-8634-0b953f37f553",
+          "recipeId": "5eedb9f2-ba2a-442b-8812-0d4f6a2a6b56",
+          "name": "Halloumi Satay"
+        },
+        {
+          "id": "fa407858-cf63-45b1-ad76-e82831188471",
+          "recipeId": "a18521e2-81ca-40d0-9040-b6f89e6d0749",
+          "name": "Salmon & Kale"
+        },
+        {
+          "id": "db198cba-d941-4320-a8a4-a21637116e09",
+          "recipeId": "a9a65e5d-f683-4b2b-8059-7f72e3883dfb",
+          "name": "Stir Fry"
         }
       ]
     }

@@ -11,12 +11,7 @@ import {
   RecipeModel,
 } from "@store";
 import { recipeApiClient } from "@services/recipe-api-client";
-import {
-  PageLayout,
-  RecipeCreateButton,
-  RecipeList,
-  RecipeSearchInput,
-} from "@components";
+import { PageLayout, RecipeList, RecipeSearch } from "@components";
 
 interface HomePagePros {
   recipes: RecipeModel[];
@@ -86,6 +81,7 @@ const Home: NextPage<HomePagePros> = ({ recipes, mealPlan }) => {
     });
 
     if (plan) {
+      setSearchText("");
       await router.replace(router.asPath);
     }
   };
@@ -139,29 +135,32 @@ const Home: NextPage<HomePagePros> = ({ recipes, mealPlan }) => {
     }
   };
 
-  const isCreateButtonDisabled = () => {
-    return !searchText;
-  };
-
   return (
     <PageLayout pageTitle="Shopping Manager">
-      <RecipeList
-        recipes={mealPlan.recipes}
-        onRecipeDelete={handleRecipeDeleteFromPlan}
-        onRecipeMoveUp={handleRecipeMoveUp}
-        onRecipeMoveDown={handleRecipeMoveDown}
-      />
-      <RecipeSearchInput
+      <RecipeSearch
         searchText={searchText}
         onSearchTextChange={setSearchText}
-      />
-      <RecipeCreateButton
         onRecipeCreateClick={handleRecipeCreate}
-        disabled={isCreateButtonDisabled()}
-        label={"Add To Plan"}
       />
+
+      {searchText ? (
+        <RecipeList
+          recipes={filteredRecipes}
+          onRecipeSelect={handleRecipeAddToPlan}
+        />
+      ) : (
+        <RecipeList
+          recipes={mealPlan.recipes}
+          onRecipeDelete={handleRecipeDeleteFromPlan}
+          onRecipeMoveUp={handleRecipeMoveUp}
+          onRecipeMoveDown={handleRecipeMoveDown}
+        />
+      )}
+
+      <hr />
+      <h2>Recipes</h2>
       <RecipeList
-        recipes={filteredRecipes}
+        recipes={recipes}
         onRecipeSelect={handleRecipeAddToPlan}
         onRecipeDelete={handleRecipeDelete}
       />
