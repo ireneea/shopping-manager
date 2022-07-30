@@ -1,17 +1,11 @@
-import type { NextPage } from "next";
-import { GetStaticProps } from "next";
-import { useRouter } from "next/router";
-import { useEffect, useState } from "react";
+import type {NextPage} from "next";
+import {GetStaticProps} from "next";
+import {useRouter} from "next/router";
+import {useEffect, useState} from "react";
 
-import {
-  findAllMealPlans,
-  findAllRecipes,
-  MealPlanModel,
-  MealPlanRecipeModel,
-  RecipeModel,
-} from "@store";
-import { recipeApiClient } from "@services/recipe-api-client";
-import { PageLayout, RecipeList, RecipeSearch } from "@components";
+import {findAllMealPlans, findAllRecipes, MealPlanModel, MealPlanRecipeModel, RecipeModel,} from "@store";
+import {recipeApiClient} from "@services/recipe-api-client";
+import {MealPlanRecipeList, PageLayout, RecipeList, RecipeSearch} from "@components";
 
 interface HomePagePros {
   recipes: RecipeModel[];
@@ -20,7 +14,7 @@ interface HomePagePros {
 
 function move<T>(from: number, to: number, arr: T[]): T[] {
   const isIndexValid = (index: number, arrLength: number) =>
-    index >= 0 && index < arrLength;
+      index >= 0 && index < arrLength;
 
   if (
     !isIndexValid(from, arr.length) ||
@@ -43,8 +37,7 @@ const Home: NextPage<HomePagePros> = ({ recipes, mealPlan }) => {
 
   const [searchText, setSearchText] = useState<string>("");
 
-  const [filteredRecipes, setFilteredRecipes] =
-    useState<RecipeModel[]>(recipes);
+  const [filteredRecipes, setFilteredRecipes] = useState<RecipeModel[]>(recipes);
 
   useEffect(() => {
     if (searchText) {
@@ -136,25 +129,25 @@ const Home: NextPage<HomePagePros> = ({ recipes, mealPlan }) => {
   };
 
   return (
-    <PageLayout pageTitle="Shopping Manager">
-      <RecipeSearch
-        searchText={searchText}
-        onSearchTextChange={setSearchText}
-        onRecipeCreateClick={handleRecipeCreate}
-      />
+      <PageLayout pageTitle="Header">
+        <RecipeSearch
+            searchText={searchText}
+            onSearchTextChange={setSearchText}
+            onRecipeCreateClick={handleRecipeCreate}
+        />
 
-      {searchText ? (
-        <RecipeList
-          recipes={filteredRecipes}
-          onRecipeSelect={handleRecipeAddToPlan}
+        {searchText ? (
+            <RecipeList
+                recipes={filteredRecipes}
+                onRecipeSelect={handleRecipeAddToPlan}
         />
       ) : (
-        <RecipeList
-          recipes={mealPlan.recipes}
-          onRecipeDelete={handleRecipeDeleteFromPlan}
-          onRecipeMoveUp={handleRecipeMoveUp}
-          onRecipeMoveDown={handleRecipeMoveDown}
-        />
+            <MealPlanRecipeList
+                recipes={mealPlan.recipes}
+                onRecipeDelete={handleRecipeDeleteFromPlan}
+                onRecipeMoveUp={handleRecipeMoveUp}
+                onRecipeMoveDown={handleRecipeMoveDown}
+            />
       )}
 
       <hr />

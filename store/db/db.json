@@ -123,6 +123,10 @@
     {
       "id": "f1c25f0f-66b2-4b93-8e9c-9ada2b8dacb0",
       "name": "Pasta mushroom chicken bake"
+    },
+    {
+      "id": "0bda299c-2d6a-4e25-ae72-c608a6b8a1ae",
+      "name": "Boeuf Bourguignon"
     }
   ],
   "mealPlans": [
@@ -131,59 +135,24 @@
       "name": "My Plan",
       "recipes": [
         {
-          "id": "dc0ecc36-cee2-42ca-94ee-4debcd82935c",
-          "recipeId": "a8a82878-587d-41b2-8cd5-46f018a3b059",
-          "name": "Mushroom bok choy bean"
-        },
-        {
-          "id": "a6f7ae3a-b52f-41e3-bbbd-1240acc13789",
-          "recipeId": "2c06acbd-c79c-470c-81f3-546970d1c3b0",
-          "name": "Moules Frittes"
-        },
-        {
-          "id": "934dbc8b-c9b5-43c4-827f-e4041fcbd2fb",
-          "recipeId": "8059fc9f-23c4-4f94-9bb6-6daea5feb644",
-          "name": "Harrisa Burgul Bake"
-        },
-        {
-          "id": "3f73940f-05ea-48af-a7ec-4ffa0814f429",
-          "recipeId": "6cb018de-ad37-4be6-8056-a22f403b8508",
-          "name": "Raclette"
-        },
-        {
-          "id": "2258923a-5f34-49db-a3d2-121da24751c6",
-          "recipeId": "18a7c22e-d3ef-4783-9e94-f4429710653b",
-          "name": "Fried Egg"
-        },
-        {
-          "id": "7e838216-6503-47db-9f0a-4908c3af3308",
-          "recipeId": "8059fc9f-23c4-4f94-9bb6-6daea5feb644",
-          "name": "Harrisa Burgul Bake"
-        },
-        {
-          "id": "3cc91f0c-8520-42e3-a348-85260f5ca545",
-          "recipeId": "f1c25f0f-66b2-4b93-8e9c-9ada2b8dacb0",
-          "name": "Pasta mushroom chicken bake"
-        },
-        {
-          "id": "f036dbcd-7e9d-4c3d-8d25-fa592a150f10",
-          "recipeId": "76d42f23-c812-4cfc-b8f1-842230c9152f",
-          "name": "Tacos"
-        },
-        {
-          "id": "531af75a-fbc9-4ef1-8634-0b953f37f553",
+          "id": "e3234d58-6f10-4b8b-99ba-d29228257dde",
           "recipeId": "5eedb9f2-ba2a-442b-8812-0d4f6a2a6b56",
           "name": "Halloumi Satay"
         },
         {
-          "id": "fa407858-cf63-45b1-ad76-e82831188471",
-          "recipeId": "a18521e2-81ca-40d0-9040-b6f89e6d0749",
-          "name": "Salmon & Kale"
+          "id": "6ee893f8-faa2-497e-8db2-f4aa76fab418",
+          "recipeId": "8059fc9f-23c4-4f94-9bb6-6daea5feb644",
+          "name": "Harrisa Burgul Bake"
         },
         {
-          "id": "db198cba-d941-4320-a8a4-a21637116e09",
-          "recipeId": "a9a65e5d-f683-4b2b-8059-7f72e3883dfb",
-          "name": "Stir Fry"
+          "id": "a84c3f9f-feb3-4bae-b98c-5470bd577deb",
+          "recipeId": "6c9bc971-b739-4d19-af2e-e670e0db4b9d",
+          "name": "Toastie"
+        },
+        {
+          "id": "7080bc28-7570-4df1-beb3-edb10b2fbc60",
+          "recipeId": "8059fc9f-23c4-4f94-9bb6-6daea5feb644",
+          "name": "Harrisa Burgul Bake"
         }
       ]
     }
