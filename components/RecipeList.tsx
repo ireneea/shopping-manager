@@ -23,7 +23,10 @@ export const RecipeList = ({
           {onRecipeSelect && (
             <>
               {" "}
-              <button onClick={() => onRecipeSelect(recipe)}>
+              <button
+                onClick={() => onRecipeSelect(recipe)}
+                className="button tiny"
+              >
                 Select Recipe
               </button>
             </>
@@ -33,6 +36,7 @@ export const RecipeList = ({
               {" "}
               <button
                 onClick={() => onRecipeDelete && onRecipeDelete(recipe.id)}
+                className="button tiny alert"
               >
                 Delete
               </button>
@@ -43,6 +47,7 @@ export const RecipeList = ({
               {" "}
               <button
                 onClick={() => onRecipeMoveUp && onRecipeMoveUp(recipe.id)}
+                className="button tiny secondary"
               >
                 Up
               </button>
@@ -53,6 +58,7 @@ export const RecipeList = ({
               {" "}
               <button
                 onClick={() => onRecipeMoveDown && onRecipeMoveDown(recipe.id)}
+                className="button tiny secondary"
               >
                 Down
               </button>

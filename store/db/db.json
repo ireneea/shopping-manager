@@ -119,6 +119,14 @@
     {
       "id": "2ab52e99-0835-41ea-b4c7-1d9c20966132",
       "name": "Frozen Pizza"
+    },
+    {
+      "id": "f1c25f0f-66b2-4b93-8e9c-9ada2b8dacb0",
+      "name": "Pasta mushroom chicken bake"
+    },
+    {
+      "id": "0bda299c-2d6a-4e25-ae72-c608a6b8a1ae",
+      "name": "Boeuf Bourguignon"
     }
   ],
   "mealPlans": [
@@ -127,34 +135,24 @@
       "name": "My Plan",
       "recipes": [
         {
-          "id": "E47CF218-4985-46B9-B548-BBB6D9010590",
+          "id": "e3234d58-6f10-4b8b-99ba-d29228257dde",
+          "recipeId": "5eedb9f2-ba2a-442b-8812-0d4f6a2a6b56",
+          "name": "Halloumi Satay"
+        },
+        {
+          "id": "6ee893f8-faa2-497e-8db2-f4aa76fab418",
           "recipeId": "8059fc9f-23c4-4f94-9bb6-6daea5feb644",
           "name": "Harrisa Burgul Bake"
         },
         {
-          "id": "dc0ecc36-cee2-42ca-94ee-4debcd82935c",
-          "recipeId": "a8a82878-587d-41b2-8cd5-46f018a3b059",
-          "name": "Mushroom bok choy bean"
+          "id": "a84c3f9f-feb3-4bae-b98c-5470bd577deb",
+          "recipeId": "6c9bc971-b739-4d19-af2e-e670e0db4b9d",
+          "name": "Toastie"
         },
         {
-          "id": "a6f7ae3a-b52f-41e3-bbbd-1240acc13789",
-          "recipeId": "2c06acbd-c79c-470c-81f3-546970d1c3b0",
-          "name": "Moules Frittes"
-        },
-        {
-          "id": "2734a9e1-09f3-4732-b267-e10bcf7c91e9",
-          "recipeId": "2ab52e99-0835-41ea-b4c7-1d9c20966132",
-          "name": "Frozen Pizza"
-        },
-        {
-          "id": "934dbc8b-c9b5-43c4-827f-e4041fcbd2fb",
+          "id": "7080bc28-7570-4df1-beb3-edb10b2fbc60",
           "recipeId": "8059fc9f-23c4-4f94-9bb6-6daea5feb644",
           "name": "Harrisa Burgul Bake"
-        },
-        {
-          "id": "3f73940f-05ea-48af-a7ec-4ffa0814f429",
-          "recipeId": "6cb018de-ad37-4be6-8056-a22f403b8508",
-          "name": "Raclette"
         }
       ]
     }

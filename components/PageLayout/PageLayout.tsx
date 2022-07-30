@@ -1,20 +1,12 @@
 import React from "react";
 import Head from "next/head";
-import Link from "next/link";
-
-import styles from "./PageLayout.module.css";
 
 type PageLayoutPros = {
   pageTitle: string;
-  isHomePage?: boolean;
   children: React.ReactNode;
 };
 
-export const PageLayout = ({
-  pageTitle,
-  children,
-  isHomePage = false,
-}: PageLayoutPros) => {
+export const PageLayout = ({ pageTitle, children }: PageLayoutPros) => {
   return (
     <>
       <Head>
@@ -22,18 +14,20 @@ export const PageLayout = ({
         <meta name="description" content="Shopping app" />
       </Head>
 
-      <div className={styles.container}>
-        <header className={styles.header}>
-          <h1>{pageTitle}</h1>
-        </header>
+      <div className="grid-container">
+        <div className="grid-x">
+          <div className="cell">
+            <header className="text-center">
+              <h1>{pageTitle}</h1>
+            </header>
+          </div>
+        </div>
 
-        <main>{children}</main>
-
-        {!isHomePage && (
-          <Link href="/">
-            <a>Back to home page</a>
-          </Link>
-        )}
+        <div className="grid-x">
+          <div className="cell large-6 large-offset-3">
+            <main>{children}</main>
+          </div>
+        </div>
       </div>
     </>
   );
