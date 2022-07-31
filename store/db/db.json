@@ -170,5 +170,27 @@
         }
       ]
     }
+  ],
+  "recipeLabels": [
+    {
+      "id": "c8bb1a83-6e5c-41df-bc7e-f057907ff866",
+      "name": "Breakfast ☕️"
+    },
+    {
+      "id": "ebc0c238-8a81-4618-9e0c-eeaf70666827",
+      "name": "Brunch 🥓"
+    },
+    {
+      "id": "85214702-320c-4c71-977a-2a325425df94",
+      "name": "Lunch 🥪"
+    },
+    {
+      "id": "9be32193-9697-4cb4-ad6f-2857674f3479",
+      "name": "Snack 🫒"
+    },
+    {
+      "id": "c90eb6ce-4e52-4f0a-8158-a9fd12ca7578",
+      "name": "Dinner 🍛"
+    }
   ]
 }
