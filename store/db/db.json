@@ -2,7 +2,13 @@
   "recipes": [
     {
       "id": "8059fc9f-23c4-4f94-9bb6-6daea5feb644",
-      "name": "Harrisa Burgul Bake"
+      "name": "Harrisa Burgul Bake",
+      "labels": [
+        {
+          "id": "c90eb6ce-4e52-4f0a-8158-a9fd12ca7578",
+          "name": "Dinner 🍛"
+        }
+      ]
     },
     {
       "id": "a8a82878-587d-41b2-8cd5-46f018a3b059",
