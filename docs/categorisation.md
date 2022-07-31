@@ -1,0 +1,126 @@
+# Recipes Categorisation
+
+- Main Ingredient
+    - Meat
+        - Chicken
+        - Beef
+        - Lamb
+        - Pork
+        - Sausage
+    - Fish
+        - Salmon
+        - Tuna
+    - Seafood
+        - Prawn
+    - Eggs
+    - Vegetables
+        - Avocado
+        - Sweet potatoes
+        - Courgette
+        - Aubergine
+        - Potato
+        - Spinach
+        - Lentils
+    - Pasta
+    - Rice
+    - Noodles
+- Cuisine
+    - African
+    - American
+    - British
+    - Caribbean
+    - Chinese
+    - East European
+    - French
+    - Greek
+    - Indian
+    - Irish
+    - Italian
+    - Japanese
+    - Korean
+    - Mexican
+    - Nordic
+    - North African
+    - Pakistani
+    - Portuguese
+    - South American
+    - Spanish
+    - Thai and South-East Asian
+    - Middle Eastern
+    - Turkish
+- Diet
+    - Vegetarian
+    - Vegan
+    - Dairy Free
+    - Gluten Free
+- Occasion
+    - Barbecue
+    - Dinner party
+    - Picnic
+- Cooking time
+    - 15 minutes
+    - 30 minutes
+    - 1 hour
+    - More than one hour
+- Prep time
+    - 15 minutes
+    - 30 minutes
+    - 1 hour
+    - More than one hour
+- Difficulty
+    - Easy
+    - Moderate
+    - Hard
+- Rating
+    - 1 star
+    - 2 stars
+    - 3 stars
+    - 4 stars
+    - 5 stars
+    - Favorite
+    - Staple
+- Cooking type
+    - Oven
+    - No cooking
+    - Microwave
+    - Barbecue
+    - Stove
+- Number of ingredients
+    - 5 or less ingredients
+- Cost
+    - Cheap
+    - Average
+    - Expensive
+- Dish type
+    - Pasta
+    - Risoto
+    - Salad
+    - Curry
+    - Soup
+    - Stew
+    - Quiche
+    - Pie
+    - Grattin
+    - Bake
+    - Stir Fry
+    - Drinks
+- Meal
+    - Breakfast
+    - Brunch
+    - Lunch
+    - Dinner
+    - Snack
+- Meal Course
+    - Starter
+    - Soup
+    - Main course
+    - Salad
+    - Side
+    - Desert
+    - Cheese
+    - Amuse-bouche
+    - Hors d'oeuvre
+    - Meal prep
+- Season
+    - Summer
+    - Winter
