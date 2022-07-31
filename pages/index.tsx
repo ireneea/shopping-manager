@@ -129,7 +129,7 @@ const Home: NextPage<HomePagePros> = ({ recipes, mealPlan }) => {
   };
 
   return (
-      <PageLayout pageTitle="Header">
+      <PageLayout pageTitle="Meal Shopping Manager">
         <RecipeSearch
             searchText={searchText}
             onSearchTextChange={setSearchText}

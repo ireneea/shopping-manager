@@ -1,4 +1,5 @@
-import { RecipeModel } from "@store";
+import {RecipeModel} from "@store";
+import Link from "next/link";
 
 interface RecipeListProps {
   recipes: RecipeModel[];
@@ -18,18 +19,20 @@ export const RecipeList = ({
   return (
     <ul>
       {recipes.map((recipe, index) => (
-        <li key={recipe.id}>
-          {recipe.name}
-          {onRecipeSelect && (
-            <>
-              {" "}
-              <button
-                onClick={() => onRecipeSelect(recipe)}
-                className="button tiny"
-              >
-                Select Recipe
-              </button>
-            </>
+          <li key={recipe.id}>
+            <Link href={`/recipes/${recipe.id}`}>
+              {recipe.name}
+            </Link>
+            {onRecipeSelect && (
+                <>
+                  {" "}
+                  <button
+                      onClick={() => onRecipeSelect(recipe)}
+                      className="button tiny"
+                  >
+                    Select Recipe
+                  </button>
+                </>
           )}
           {onRecipeDelete && (
             <>
