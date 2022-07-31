@@ -127,6 +127,10 @@
     {
       "id": "0bda299c-2d6a-4e25-ae72-c608a6b8a1ae",
       "name": "Boeuf Bourguignon"
+    },
+    {
+      "id": "c773d643-a92e-4647-b767-4a1ffc6f9a63",
+      "name": "Creamy chicken"
     }
   ],
   "mealPlans": [
@@ -153,6 +157,16 @@
           "id": "7080bc28-7570-4df1-beb3-edb10b2fbc60",
           "recipeId": "8059fc9f-23c4-4f94-9bb6-6daea5feb644",
           "name": "Harrisa Burgul Bake"
+        },
+        {
+          "id": "5b8c58e3-1c5c-4506-ba74-faae94fe1eb4",
+          "recipeId": "8059fc9f-23c4-4f94-9bb6-6daea5feb644",
+          "name": "Harrisa Burgul Bake"
+        },
+        {
+          "id": "303a92d7-a1ad-49cc-90b2-7bf512ad46ba",
+          "recipeId": "c773d643-a92e-4647-b767-4a1ffc6f9a63",
+          "name": "Creamy chicken"
         }
       ]
     }
