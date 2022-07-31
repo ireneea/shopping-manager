@@ -46,7 +46,8 @@ const RecipePage: NextPage<RecipePageProps> = ({recipe, labels}) => {
 
     const handleRecipeSave = async () => {
         const updatedRecipe = await recipeApiClient.updateRecipe({
-            recipeId: recipe?.id as string, name: recipeName
+            recipeId: recipe?.id as string, name: recipeName,
+            labels: labels.filter(label => recipeLabels[label.name])
         });
 
         if (updatedRecipe) {
