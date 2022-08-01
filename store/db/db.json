@@ -20,15 +20,33 @@
     },
     {
       "id": "a8a82878-587d-41b2-8cd5-46f018a3b059",
-      "name": "Mushroom bok choy bean"
+      "name": "Mushroom bok choy bean",
+      "labels": [
+        {
+          "id": "c90eb6ce-4e52-4f0a-8158-a9fd12ca7578",
+          "name": "Dinner 🍛"
+        }
+      ]
     },
     {
       "id": "ea35cd72-5233-46de-8331-becec9a7a4d0",
-      "name": "Lemon pea gnocchi"
+      "name": "Lemon pea gnocchi",
+      "labels": [
+        {
+          "id": "c90eb6ce-4e52-4f0a-8158-a9fd12ca7578",
+          "name": "Dinner 🍛"
+        }
+      ]
     },
     {
       "id": "5eedb9f2-ba2a-442b-8812-0d4f6a2a6b56",
-      "name": "Halloumi Satay"
+      "name": "Halloumi Satay",
+      "labels": [
+        {
+          "id": "c90eb6ce-4e52-4f0a-8158-a9fd12ca7578",
+          "name": "Dinner 🍛"
+        }
+      ]
     },
     {
       "id": "9ba7b7cc-6e28-48fb-8216-a687cfeb1a23",
@@ -92,7 +110,17 @@
     },
     {
       "id": "da7765c1-e623-45cc-9e0b-f86f499a01d2",
-      "name": "Boiled Egg"
+      "name": "Boiled Egg",
+      "labels": [
+        {
+          "id": "c8bb1a83-6e5c-41df-bc7e-f057907ff866",
+          "name": "Breakfast ☕️"
+        },
+        {
+          "id": "ebc0c238-8a81-4618-9e0c-eeaf70666827",
+          "name": "Brunch 🥓"
+        }
+      ]
     },
     {
       "id": "d71356f7-e872-49ff-962e-53f3e3dd4b96",
@@ -130,7 +158,13 @@
     },
     {
       "id": "a9a7f93f-87b6-49f5-9d8d-cb7a0257a1fa",
-      "name": "Chicken Soupe"
+      "name": "Chicken Soup",
+      "labels": [
+        {
+          "id": "c90eb6ce-4e52-4f0a-8158-a9fd12ca7578",
+          "name": "Dinner 🍛"
+        }
+      ]
     },
     {
       "id": "034d0eff-42fb-45ba-a499-0707771ac5ab",
@@ -200,6 +234,56 @@
           "id": "8e2c02ec-0db0-4682-8738-f0c83ea73a3c",
           "recipeId": "2ab52e99-0835-41ea-b4c7-1d9c20966132",
           "name": "Frozen Pizza"
+        },
+        {
+          "id": "e3d5a09f-4679-4e9e-9e22-a8cd44d98287",
+          "recipeId": "a8a82878-587d-41b2-8cd5-46f018a3b059",
+          "name": "Mushroom bok choy bean",
+          "labels": [
+            {
+              "id": "c90eb6ce-4e52-4f0a-8158-a9fd12ca7578",
+              "name": "Dinner 🍛"
+            }
+          ]
+        },
+        {
+          "id": "8e1d4b6b-93c1-4d04-ae90-031263206ffa",
+          "recipeId": "8059fc9f-23c4-4f94-9bb6-6daea5feb644",
+          "name": "Harrisa Burgul Bake",
+          "labels": [
+            {
+              "id": "85214702-320c-4c71-977a-2a325425df94",
+              "name": "Lunch 🥪"
+            },
+            {
+              "id": "9be32193-9697-4cb4-ad6f-2857674f3479",
+              "name": "Snack 🫒"
+            },
+            {
+              "id": "c90eb6ce-4e52-4f0a-8158-a9fd12ca7578",
+              "name": "Dinner 🍛"
+            }
+          ]
+        },
+        {
+          "id": "9cf130a0-83c3-46a0-978d-4ed3a0fb8a90",
+          "recipeId": "5eedb9f2-ba2a-442b-8812-0d4f6a2a6b56",
+          "name": "Halloumi Satay"
+        },
+        {
+          "id": "64bae7a9-c35e-4d61-8941-48b7104e315c",
+          "recipeId": "cc24844f-085a-457e-b1ac-749a31b8d909",
+          "name": "Grilled Bacon",
+          "labels": [
+            {
+              "id": "ebc0c238-8a81-4618-9e0c-eeaf70666827",
+              "name": "Brunch 🥓"
+            },
+            {
+              "id": "9be32193-9697-4cb4-ad6f-2857674f3479",
+              "name": "Snack 🫒"
+            }
+          ]
         }
       ]
     }

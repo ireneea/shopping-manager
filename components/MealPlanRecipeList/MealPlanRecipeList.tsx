@@ -1,4 +1,4 @@
-import styles from "./MealPlanRecipeList.tsx.module.scss";
+import styles from "./MealPlanRecipeList.module.scss";
 import {MealPlanRecipeModel} from "@store";
 import {MealPlanRecipeItem} from "../MealPlanRecipeItem";
 
