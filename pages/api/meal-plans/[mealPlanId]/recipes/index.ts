@@ -1,11 +1,11 @@
-import { NextApiRequest, NextApiResponse } from "next";
-import { MealPlanModel } from "@store";
-import { ApiError, HttpMethod } from "@libs/api-utils";
-import { addMealPlanRecipeHandler } from "@services/recipe-api";
+import {NextApiRequest, NextApiResponse} from "next";
+import {MealPlanModel} from "@store";
+import {ApiError, HttpMethod} from "@libs/api-utils";
+import {addMealPlanRecipeHandler} from "@services/recipe-api";
 
 const mealPlanRecipesController = async (
-  req: NextApiRequest,
-  res: NextApiResponse<MealPlanModel | ApiError>
+    req: NextApiRequest,
+    res: NextApiResponse<MealPlanModel | null | ApiError>
 ) => {
   switch (req.method) {
     case HttpMethod.POST:
