@@ -1,5 +1,9 @@
-import {RecipeModel} from "@store";
+import {RecipeLabelModel, RecipeModel} from "@store";
 import Link from "next/link";
+import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
+import {faCoffee, faPen, faTrash} from '@fortawesome/free-solid-svg-icons'
+
+import styles from './RecipeList.module.scss';
 
 interface RecipeListProps {
     recipes: RecipeModel[];
@@ -20,47 +24,51 @@ const RecipeItem = (props: RecipeItemProps) => {
         onRecipeDelete
     } = props;
 
-    return <div className="card">
-        <div className="card-section">
-            <h4>
-                <Link href={`/recipes/${recipe.id}`}>
-                    {recipe.name}
-                </Link>
-            </h4>
-        </div>
-
-        {
-            recipe.labels?.length && <div className="card-section">
-                {recipe.labels?.map(label => (<span className="label secondary radius">{label.name}</span>))}
-            </div>
+    const renderLabels = (labels?: RecipeLabelModel[]) => {
+        if (!labels || !labels.length) {
+            return null;
         }
 
-        <div className="card-divider">
-            <div>
+        return (
+            <div className={styles.labels}>
+                {labels.map((label) => <span key={label.id}>{label.name}</span>)}
+            </div>
+        )
+    }
+
+    return (
+        <div className={`callout flex-container align-middle align-justify ${styles.recipeItem}`}>
+            <div className={``}>
+                <h4>{recipe.name}</h4>
+                {renderLabels(recipe.labels)}
+            </div>
+            <div className={`${styles.recipeActions}`}>
                 {onRecipeSelect && (
                     <button
                         onClick={() => onRecipeSelect(recipe)}
-                        className="button tiny success"
+                        className="hollow button"
                     >
-                        ➕ Add
+                        <FontAwesomeIcon icon={faCoffee}/>
                     </button>
                 )}
 
                 <Link href={`/recipes/${recipe.id}`}>
-                    <a className="button tiny">✏️ Edit</a>
+                    <a className="hollow button">
+                        <FontAwesomeIcon icon={faPen}/>
+                    </a>
                 </Link>
 
                 {onRecipeDelete && (
                     <button
                         onClick={() => onRecipeDelete && onRecipeDelete(recipe.id)}
-                        className="button tiny alert"
+                        className="hollow button alert"
                     >
-                        🗑 Delete
+                        <FontAwesomeIcon icon={faTrash}/>
                     </button>
                 )}
             </div>
         </div>
-    </div>
+    )
 }
 
 export const RecipeList = (props: RecipeListProps) => {
@@ -71,7 +79,7 @@ export const RecipeList = (props: RecipeListProps) => {
     } = props;
 
     return (
-        <div className="grid-x grid-padding-x small-up-1 medium-up-2 large-up-3">
+        <div className={`grid-x ${styles.recipeList}`}>
             {recipes.map((recipe) => (
                 <div className="cell" key={recipe.id}>
                     <RecipeItem

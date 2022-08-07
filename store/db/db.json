@@ -6,15 +6,15 @@
       "labels": [
         {
           "id": "85214702-320c-4c71-977a-2a325425df94",
-          "name": "Lunch 🥪"
+          "name": "Lunch"
         },
         {
           "id": "9be32193-9697-4cb4-ad6f-2857674f3479",
-          "name": "Snack 🫒"
+          "name": "Snack"
         },
         {
           "id": "c90eb6ce-4e52-4f0a-8158-a9fd12ca7578",
-          "name": "Dinner 🍛"
+          "name": "Dinner"
         }
       ]
     },
@@ -24,7 +24,7 @@
       "labels": [
         {
           "id": "c90eb6ce-4e52-4f0a-8158-a9fd12ca7578",
-          "name": "Dinner 🍛"
+          "name": "Dinner"
         }
       ]
     },
@@ -34,7 +34,7 @@
       "labels": [
         {
           "id": "c90eb6ce-4e52-4f0a-8158-a9fd12ca7578",
-          "name": "Dinner 🍛"
+          "name": "Dinner"
         }
       ]
     },
@@ -44,13 +44,19 @@
       "labels": [
         {
           "id": "c90eb6ce-4e52-4f0a-8158-a9fd12ca7578",
-          "name": "Dinner 🍛"
+          "name": "Dinner"
         }
       ]
     },
     {
       "id": "9ba7b7cc-6e28-48fb-8216-a687cfeb1a23",
-      "name": "Monstrone Orzo"
+      "name": "Monstrone Orzo",
+      "labels": [
+        {
+          "id": "c90eb6ce-4e52-4f0a-8158-a9fd12ca7578",
+          "name": "Dinner"
+        }
+      ]
     },
     {
       "id": "a18521e2-81ca-40d0-9040-b6f89e6d0749",
@@ -114,11 +120,11 @@
       "labels": [
         {
           "id": "c8bb1a83-6e5c-41df-bc7e-f057907ff866",
-          "name": "Breakfast ☕️"
+          "name": "Breakfast️"
         },
         {
           "id": "ebc0c238-8a81-4618-9e0c-eeaf70666827",
-          "name": "Brunch 🥓"
+          "name": "Brunch"
         }
       ]
     },
@@ -140,11 +146,11 @@
       "labels": [
         {
           "id": "ebc0c238-8a81-4618-9e0c-eeaf70666827",
-          "name": "Brunch 🥓"
+          "name": "Brunch"
         },
         {
           "id": "9be32193-9697-4cb4-ad6f-2857674f3479",
-          "name": "Snack 🫒"
+          "name": "Snack"
         }
       ]
     },
@@ -162,7 +168,7 @@
       "labels": [
         {
           "id": "c90eb6ce-4e52-4f0a-8158-a9fd12ca7578",
-          "name": "Dinner 🍛"
+          "name": "Dinner"
         }
       ]
     },
@@ -203,15 +209,15 @@
           "labels": [
             {
               "id": "85214702-320c-4c71-977a-2a325425df94",
-              "name": "Lunch 🥪"
+              "name": "Lunch"
             },
             {
               "id": "9be32193-9697-4cb4-ad6f-2857674f3479",
-              "name": "Snack 🫒"
+              "name": "Snack"
             },
             {
               "id": "c90eb6ce-4e52-4f0a-8158-a9fd12ca7578",
-              "name": "Dinner 🍛"
+              "name": "Dinner"
             }
           ]
         },
@@ -242,7 +248,7 @@
           "labels": [
             {
               "id": "c90eb6ce-4e52-4f0a-8158-a9fd12ca7578",
-              "name": "Dinner 🍛"
+              "name": "Dinner"
             }
           ]
         },
@@ -253,15 +259,15 @@
           "labels": [
             {
               "id": "85214702-320c-4c71-977a-2a325425df94",
-              "name": "Lunch 🥪"
+              "name": "Lunch"
             },
             {
               "id": "9be32193-9697-4cb4-ad6f-2857674f3479",
-              "name": "Snack 🫒"
+              "name": "Snack"
             },
             {
               "id": "c90eb6ce-4e52-4f0a-8158-a9fd12ca7578",
-              "name": "Dinner 🍛"
+              "name": "Dinner"
             }
           ]
         },
@@ -277,11 +283,11 @@
           "labels": [
             {
               "id": "ebc0c238-8a81-4618-9e0c-eeaf70666827",
-              "name": "Brunch 🥓"
+              "name": "Brunch"
             },
             {
               "id": "9be32193-9697-4cb4-ad6f-2857674f3479",
-              "name": "Snack 🫒"
+              "name": "Snack"
             }
           ]
         }
@@ -291,23 +297,23 @@
   "recipeLabels": [
     {
       "id": "c8bb1a83-6e5c-41df-bc7e-f057907ff866",
-      "name": "Breakfast ☕️"
+      "name": "Breakfast"
     },
     {
       "id": "ebc0c238-8a81-4618-9e0c-eeaf70666827",
-      "name": "Brunch 🥓"
+      "name": "Brunch"
     },
     {
       "id": "85214702-320c-4c71-977a-2a325425df94",
-      "name": "Lunch 🥪"
+      "name": "Lunch"
     },
     {
       "id": "9be32193-9697-4cb4-ad6f-2857674f3479",
-      "name": "Snack 🫒"
+      "name": "Snack"
     },
     {
       "id": "c90eb6ce-4e52-4f0a-8158-a9fd12ca7578",
-      "name": "Dinner 🍛"
+      "name": "Dinner"
     }
   ]
 }
