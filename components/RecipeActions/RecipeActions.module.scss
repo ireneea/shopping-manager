@@ -1,0 +1,11 @@
+.recipeActions {
+  button,
+  a {
+    margin-bottom: 0;
+    margin-right: 0.5rem;
+  }
+
+  *:last-child {
+    margin-right: 0;
+  }
+}

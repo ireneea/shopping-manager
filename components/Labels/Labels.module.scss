@@ -1,0 +1,12 @@
+@import 'foundation';
+
+.labels {
+  span {
+    color: $secondary-color;
+    margin-right: 1rem;
+  }
+
+  span:last-child {
+    margin-right: 0;
+  }
+}

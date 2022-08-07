@@ -1,6 +1,5 @@
-import styles from "./MealPlanRecipeList.tsx.module.scss";
 import {MealPlanRecipeModel} from "@store";
-import {MealPlanRecipeItem} from "../MealPlanRecipeItem";
+import {MealPlanRecipeListItem} from "../MealPlanRecipeListItem";
 
 interface MealPlanRecipeListProps {
   recipes: MealPlanRecipeModel[];
@@ -13,10 +12,10 @@ export const MealPlanRecipeList = (props: MealPlanRecipeListProps) => {
   const {recipes, onRecipeDelete, onRecipeMoveUp, onRecipeMoveDown} = props;
 
   return (
-      <ol className={styles.recipeList}>
+      <div className={`grid-x`}>
         {recipes.map((recipe, index) => (
-            <li key={recipe.id}>
-              <MealPlanRecipeItem
+            <div className="cell" key={recipe.id}>
+              <MealPlanRecipeListItem
                   recipe={recipe}
                   onRecipeDelete={() => onRecipeDelete && onRecipeDelete(recipe.id)}
                   onRecipeMoveUp={() => onRecipeMoveUp && onRecipeMoveUp(recipe.id)}
@@ -26,8 +25,8 @@ export const MealPlanRecipeList = (props: MealPlanRecipeListProps) => {
                   }
                   moveDownDisabled={index === recipes.length - 1}
               />
-            </li>
+            </div>
         ))}
-      </ol>
+      </div>
   );
 };

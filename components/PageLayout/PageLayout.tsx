@@ -24,7 +24,7 @@ export const PageLayout = ({ pageTitle, children }: PageLayoutPros) => {
         </div>
 
         <div className="grid-x">
-          <div className="cell large-6 large-offset-3">
+          <div className="cell">
             <main>{children}</main>
           </div>
         </div>
