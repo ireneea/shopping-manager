@@ -12,7 +12,7 @@ import {
     findRecipeById,
     updateMealPlan,
     updateRecipe
-} from "../store-functions";
+} from "./store-functions";
 
 export const lowDgStore: StoreFunctions = {
     mealPlan: {

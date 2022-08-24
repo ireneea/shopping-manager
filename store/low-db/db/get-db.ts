@@ -1,9 +1,9 @@
-import { join, dirname } from "path";
-import { fileURLToPath } from "url";
-import { JSONFile, Low } from "lowdb";
+import {dirname, join} from "path";
+import {fileURLToPath} from "url";
+import {JSONFile, Low} from "lowdb";
 
-import { StoreModel } from "../models/store.model";
-import { seedData } from "./seed-data";
+import {StoreModel} from "@store";
+import {seedData} from "./seed-data";
 
 export const getDb = async () => {
   const __dirname = dirname(fileURLToPath(import.meta.url));

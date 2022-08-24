@@ -1,6 +1,6 @@
 import {getDb} from "../../db/get-db";
 import {randomUUID} from "crypto";
-import {AddRecipeToMealPlanInput, MealPlanModel} from "../../models";
+import {AddRecipeToMealPlanInput, MealPlanModel} from "../../../models";
 
 export const addRecipeToMealPlan = async (input: AddRecipeToMealPlanInput) => {
   const db = await getDb();

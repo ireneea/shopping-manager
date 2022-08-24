@@ -1,5 +1,5 @@
 import {getDb} from "../../db/get-db";
-import {DeleteRecipeFromMealPlanInput} from "../../models";
+import {DeleteRecipeFromMealPlanInput} from "../../../models";
 
 export const deleteRecipeFromMealPlan = async (
     input: DeleteRecipeFromMealPlanInput

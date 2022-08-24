@@ -1,7 +1,6 @@
 import {lowDgStore} from "./low-db";
 
 export * from "./models";
-export * from "./store-functions";
 export * from "./low-db";
 
 let store;

@@ -1,4 +1,4 @@
-import { getDb } from "../../db/get-db";
+import {getDb} from "../../db/get-db";
 
 export const findAllMealPlans = async () => {
   const db = await getDb();
