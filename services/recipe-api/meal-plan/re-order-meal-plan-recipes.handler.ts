@@ -1,20 +1,15 @@
-import { NextApiRequest, NextApiResponse } from "next";
-import { ApiError } from "@libs/api-utils";
-import {
-  findMealPlanById,
-  MealPlanModel,
-  MealPlanRecipeModel,
-  updateMealPlan,
-} from "@store";
-import { ReOrderMealPlanRecipesInput } from "./re-order-meal-plan-recipes.input";
+import {NextApiRequest, NextApiResponse} from "next";
+import {ApiError} from "@libs/api-utils";
+import {findMealPlanById, MealPlanModel, MealPlanRecipeModel, shoppingManagerStore,} from "@store";
+import {ReOrderMealPlanRecipesInput} from "./re-order-meal-plan-recipes.input";
 
 export const reOrderMealPlanRecipesHandler = async (
-  req: NextApiRequest,
-  res: NextApiResponse<MealPlanModel | ApiError>
+    req: NextApiRequest,
+    res: NextApiResponse<MealPlanModel | ApiError>
 ) => {
   try {
     const input = req.body as ReOrderMealPlanRecipesInput;
-    const { mealPlanId, recipesIds } = input;
+    const {mealPlanId, recipesIds} = input;
     const mealPlan = await findMealPlanById(mealPlanId);
 
     if (!mealPlan) {
@@ -38,7 +33,7 @@ export const reOrderMealPlanRecipesHandler = async (
         .json({ error: "Cannot re-order recipes: Invalid recipesIds input" });
     }
 
-    const updatedMealPlan = await updateMealPlan({
+    const updatedMealPlan = await shoppingManagerStore.mealPlan.updateMealPlan({
       ...mealPlan,
       recipes,
     });

@@ -1,7 +1,7 @@
 import {NextApiRequest, NextApiResponse} from "next";
 import {DeleteRecipeResponse} from "./delete-recipe.response";
 import {ApiError} from "@libs/api-utils";
-import {deleteRecipe} from "@store";
+import {shoppingManagerStore} from "@store";
 
 export const deleteRecipeHandler = async (
     req: NextApiRequest,
@@ -9,7 +9,7 @@ export const deleteRecipeHandler = async (
 ) => {
   try {
     const recipeId = req.query.recipeId as string;
-    const deletedRecipe = await deleteRecipe(recipeId);
+    const deletedRecipe = await shoppingManagerStore.recipe.deleteRecipe(recipeId);
     return res.status(200).json({deleted: deletedRecipe ? deletedRecipe.id : null});
   } catch (err) {
     return res

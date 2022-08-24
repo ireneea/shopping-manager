@@ -1,4 +1,4 @@
-import {RecipeModel} from "../../models";
+import {RecipeModel} from "../index";
 
 export interface AddRecipeToMealPlanInput {
   mealPlanId: string;

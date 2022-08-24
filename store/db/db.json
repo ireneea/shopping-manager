@@ -141,6 +141,10 @@
       "name": "Grilled Bacon",
       "labels": [
         {
+          "id": "c8bb1a83-6e5c-41df-bc7e-f057907ff866",
+          "name": "Breakfast"
+        },
+        {
           "id": "ebc0c238-8a81-4618-9e0c-eeaf70666827",
           "name": "Brunch"
         },
@@ -191,6 +195,10 @@
     {
       "id": "c773d643-a92e-4647-b767-4a1ffc6f9a63",
       "name": "Creamy chicken"
+    },
+    {
+      "id": "7a5be1b7-80ea-4b78-aaf9-d91f01d92f56",
+      "name": "steak potatoes"
     }
   ],
   "mealPlans": [
@@ -253,17 +261,6 @@
           ]
         },
         {
-          "id": "e3d5a09f-4679-4e9e-9e22-a8cd44d98287",
-          "recipeId": "a8a82878-587d-41b2-8cd5-46f018a3b059",
-          "name": "Mushroom bok choy bean",
-          "labels": [
-            {
-              "id": "c90eb6ce-4e52-4f0a-8158-a9fd12ca7578",
-              "name": "Dinner"
-            }
-          ]
-        },
-        {
           "id": "8e1d4b6b-93c1-4d04-ae90-031263206ffa",
           "recipeId": "8059fc9f-23c4-4f94-9bb6-6daea5feb644",
           "name": "Harrisa Burgul Bake",
@@ -286,6 +283,35 @@
           "id": "9cf130a0-83c3-46a0-978d-4ed3a0fb8a90",
           "recipeId": "5eedb9f2-ba2a-442b-8812-0d4f6a2a6b56",
           "name": "Halloumi Satay"
+        },
+        {
+          "id": "9cf8887e-4c36-412a-ab3d-7c4fd17cfb50",
+          "recipeId": "8059fc9f-23c4-4f94-9bb6-6daea5feb644",
+          "name": "Harrisa Burgul Bake",
+          "labels": [
+            {
+              "id": "85214702-320c-4c71-977a-2a325425df94",
+              "name": "Lunch"
+            },
+            {
+              "id": "9be32193-9697-4cb4-ad6f-2857674f3479",
+              "name": "Snack"
+            },
+            {
+              "id": "c90eb6ce-4e52-4f0a-8158-a9fd12ca7578",
+              "name": "Dinner"
+            }
+          ]
+        },
+        {
+          "id": "23083002-62ac-4d18-b757-6a26a7155e48",
+          "recipeId": "6c9bc971-b739-4d19-af2e-e670e0db4b9d",
+          "name": "Toastie"
+        },
+        {
+          "id": "dc317212-c71b-4ce8-95a6-92ff52daa5fa",
+          "recipeId": "7a5be1b7-80ea-4b78-aaf9-d91f01d92f56",
+          "name": "steak potatoes"
         }
       ]
     }

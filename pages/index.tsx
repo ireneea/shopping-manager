@@ -3,7 +3,7 @@ import {GetStaticProps} from "next";
 import {useRouter} from "next/router";
 import {useEffect, useState} from "react";
 
-import {findAllMealPlans, findAllRecipes, MealPlanModel, MealPlanRecipeModel, RecipeModel,} from "@store";
+import {MealPlanModel, MealPlanRecipeModel, RecipeModel, shoppingManagerStore,} from "@store";
 import {recipeApiClient} from "@services/recipe-api-client";
 import {MealPlanRecipeList, PageLayout, RecipeList, RecipeSearch} from "@components";
 
@@ -162,8 +162,8 @@ const Home: NextPage<HomePagePros> = ({ recipes, mealPlan }) => {
 };
 
 export const getStaticProps: GetStaticProps = async () => {
-  const recipes = await findAllRecipes();
-  const mealPlans = await findAllMealPlans();
+  const recipes = await shoppingManagerStore.recipe.findAllRecipes();
+  const mealPlans = await shoppingManagerStore.mealPlan.findAllMealPlans();
   return {
     props: {
       recipes,

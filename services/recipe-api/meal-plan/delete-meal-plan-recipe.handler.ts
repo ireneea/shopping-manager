@@ -1,16 +1,16 @@
-import { NextApiRequest, NextApiResponse } from "next";
-import { ApiError } from "@libs/api-utils";
-import { deleteRecipeFromMealPlan } from "@store";
-import { DeleteMealPlanRecipeResponse } from "./delete-meal-plan-recipe.response";
+import {NextApiRequest, NextApiResponse} from "next";
+import {ApiError} from "@libs/api-utils";
+import {shoppingManagerStore} from "@store";
+import {DeleteMealPlanRecipeResponse} from "./delete-meal-plan-recipe.response";
 
 export const deleteMealPlanRecipeHandler = async (
-  req: NextApiRequest,
-  res: NextApiResponse<DeleteMealPlanRecipeResponse | ApiError>
+    req: NextApiRequest,
+    res: NextApiResponse<DeleteMealPlanRecipeResponse | ApiError>
 ) => {
   try {
     const mealPlanRecipeId = req.query.mealRecipeId as string;
     const mealPlanId = req.query.mealPlanId as string;
-    const mealPlan = await deleteRecipeFromMealPlan({
+    const mealPlan = await shoppingManagerStore.mealPlan.deleteRecipeFromMealPlan({
       mealPlanId,
       mealPlanRecipeId,
     });

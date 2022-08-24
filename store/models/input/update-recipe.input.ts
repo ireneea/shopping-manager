@@ -1,4 +1,4 @@
-import {RecipeLabelModel} from "../../models";
+import {RecipeLabelModel} from "../index";
 
 export interface UpdateRecipeInput {
     recipeId: string;
