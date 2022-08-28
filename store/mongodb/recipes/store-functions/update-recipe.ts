@@ -16,4 +16,3 @@ export const updateRecipe = async (input: RecipeStoreModel) => {
 
     return result.value
 }
-

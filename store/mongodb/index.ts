@@ -1,5 +1,11 @@
 import {StoreFunctions} from "../models/store-functions.interface";
-import {AddRecipeInput, UpdateRecipeInput} from "@store";
+import {
+    AddRecipeInput,
+    AddRecipeToMealPlanInput,
+    DeleteRecipeFromMealPlanInput,
+    MealPlanModel,
+    UpdateRecipeInput
+} from "@store";
 import {
     addRecipe,
     deleteRecipe,
@@ -10,20 +16,41 @@ import {
     updateRecipe
 } from "./recipes";
 import {findAllRecipeLabels, mapRecipeLabelStoreToRecipeLabel} from "./recipe-labels";
-
-const MOCK_MEAL_PLAN = {
-    id: "A04B2C78-6CA9-41FF-A0D2-68FCFD28C6A6",
-    name: "My Plan",
-    recipes: []
-}
+import {
+    addRecipeToMealPlan,
+    deleteRecipeFromMealPlan,
+    findAllMealPlans,
+    findMealPlanById,
+    mapAddRecipeToMealPlanInputToMealPlanRecipeStore,
+    mapMealPlanStoreToMealPlan,
+    mapMealPlanToMealPlanStore,
+    updateMealPlan
+} from "./meal-plans";
 
 export const mongodbStore: StoreFunctions = {
     mealPlan: {
-        addRecipeToMealPlan: async () => MOCK_MEAL_PLAN,
-        deleteRecipeFromMealPlan: async () => MOCK_MEAL_PLAN,
-        findAllMealPlans: async () => [MOCK_MEAL_PLAN],
-        findMealPlanById: async () => MOCK_MEAL_PLAN,
-        updateMealPlan: async () => MOCK_MEAL_PLAN,
+        addRecipeToMealPlan: async (input: AddRecipeToMealPlanInput) => {
+            const mealPlanRecipe = mapAddRecipeToMealPlanInputToMealPlanRecipeStore(input)
+            const storeMealPlan = await addRecipeToMealPlan(input.mealPlanId, mealPlanRecipe);
+            return storeMealPlan ? mapMealPlanStoreToMealPlan(storeMealPlan) : null;
+        },
+        deleteRecipeFromMealPlan: async (input: DeleteRecipeFromMealPlanInput) => {
+            const storeMealPlan = await deleteRecipeFromMealPlan(input.mealPlanId, input.mealPlanRecipeId);
+            return storeMealPlan ? mapMealPlanStoreToMealPlan(storeMealPlan) : null;
+        },
+        findAllMealPlans: async () => {
+            const storeMealPlans = await findAllMealPlans();
+            return storeMealPlans.map(mapMealPlanStoreToMealPlan);
+        },
+        findMealPlanById: async (mealPlanId: string) => {
+            const storeMealPlan = await findMealPlanById(mealPlanId);
+            return storeMealPlan ? mapMealPlanStoreToMealPlan(storeMealPlan) : null;
+        },
+        updateMealPlan: async (input: MealPlanModel) => {
+            const storeInput = mapMealPlanToMealPlanStore(input);
+            const storeMealPlan = await updateMealPlan(storeInput);
+            return storeMealPlan ? mapMealPlanStoreToMealPlan(storeMealPlan) : null;
+        },
     },
     recipe: {
         addRecipe: async (input: AddRecipeInput) => {
