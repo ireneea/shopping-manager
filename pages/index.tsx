@@ -5,11 +5,6 @@ import {MealPlanModel, MealPlanRecipeModel, RecipeModel,} from "@store";
 import {recipeApiClient} from "@services/recipe-api-client";
 import {MealPlanRecipeList, PageLayout, RecipeList, RecipeSearch} from "@components";
 
-interface HomePagePros {
-    recipes: RecipeModel[];
-    mealPlan: MealPlanModel;
-}
-
 function move<T>(from: number, to: number, arr: T[]): T[] {
     const isIndexValid = (index: number, arrLength: number) =>
         index >= 0 && index < arrLength;
@@ -30,7 +25,7 @@ function move<T>(from: number, to: number, arr: T[]): T[] {
     return newArr;
 }
 
-const Home: NextPage<HomePagePros> = () => {
+const Home: NextPage = () => {
 
     const [searchText, setSearchText] = useState<string>("");
     const [recipes, setRecipes] = useState<RecipeModel[]>([])

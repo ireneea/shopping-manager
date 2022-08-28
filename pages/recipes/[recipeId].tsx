@@ -1,19 +1,11 @@
+import {GetServerSideProps, NextPage} from "next";
 import {PageLayout} from "@components";
-import {GetStaticPaths, GetStaticProps, GetStaticPropsContext, NextPage} from "next";
-import {RecipeLabelModel, RecipeModel, shoppingManagerStore} from "@store";
-import {ChangeEventHandler, useState} from "react";
+
+import {RecipeLabelModel, RecipeModel} from "@store";
+import {ChangeEventHandler, FormEvent, useEffect, useState} from "react";
 import {recipeApiClient} from "@services/recipe-api-client";
 import {useRouter} from "next/router";
 import Link from "next/link";
-
-type RecipePageParams = {
-    recipeId: string
-}
-
-type RecipePageProps = {
-    recipe: RecipeModel | null
-    labels: RecipeLabelModel[]
-}
 
 type LabelsDictionary = { [labelName: string]: boolean }
 
@@ -25,18 +17,49 @@ const setRecipeInput = (recipeLabels: RecipeLabelModel[], allLabels: RecipeLabel
     }, initialInputs)
 }
 
-
-const RecipePage: NextPage<RecipePageProps> = ({recipe, labels}) => {
+const RecipePage: NextPage = () => {
     const router = useRouter();
 
-    const isRecipeFound = !!recipe
-    const [recipeName, setRecipeName] = useState<string>(recipe?.name ?? "")
-    const [recipeLabels, setRecipeLabel] = useState<LabelsDictionary>(setRecipeInput(recipe?.labels ?? [], labels ?? []))
+    const [labels, setLabels] = useState<RecipeLabelModel[]>([]);
+    const [recipe, setRecipe] = useState<RecipeModel>();
+    const [recipeName, setRecipeName] = useState<string>("");
+    const [recipeLabels, setRecipeLabel] = useState<LabelsDictionary>({});
 
+    const isRecipeFound = !!recipe;
+
+    useEffect(() => {
+        const fetchRecipeLabels = async () => {
+            const result = await recipeApiClient.findAllRecipeLabels();
+            if (result) {
+                setLabels(result);
+            }
+        }
+
+        fetchRecipeLabels().catch(console.error);
+    }, []);
+
+    useEffect(() => {
+        const fetchRecipe = async () => {
+            const {recipeId} = router.query;
+            const result = await recipeApiClient.findRecipeById(recipeId as string);
+            if (result) {
+                setRecipe(result);
+            }
+        }
+
+        fetchRecipe().catch(console.error);
+    }, []);
+
+    useEffect(() => {
+        if (recipe) {
+            setRecipeName(recipe.name);
+            setRecipeLabel(setRecipeInput(recipe.labels ?? [], labels))
+        }
+    }, [recipe, labels])
 
     const handleRecipeNameChange: ChangeEventHandler<HTMLInputElement> = (event) => {
         const inputValue = event.target.value;
-        setRecipeName(inputValue)
+        setRecipeName(inputValue);
     }
 
     const handleLabelChange: ChangeEventHandler<HTMLInputElement> = (event) => {
@@ -44,19 +67,20 @@ const RecipePage: NextPage<RecipePageProps> = ({recipe, labels}) => {
         setRecipeLabel(prevState => ({...prevState, [name]: !prevState[name]}))
     }
 
-    const handleRecipeSave = async () => {
+    const handleFormSubmit = async (event: FormEvent<HTMLFormElement>) => {
+        event.preventDefault();
         const updatedRecipe = await recipeApiClient.updateRecipe({
             recipeId: recipe?.id as string, name: recipeName,
             labels: labels.filter(label => recipeLabels[label.name])
         });
 
         if (updatedRecipe) {
-            await router.replace(router.asPath);
+            setRecipe(updatedRecipe);
         }
     }
 
     return (<PageLayout pageTitle="Recipe">
-        {isRecipeFound && (<form>
+        {isRecipeFound && (<form onSubmit={handleFormSubmit}>
             <div className="row">
                 <div className="large-12 columns">
                     <label>
@@ -79,7 +103,7 @@ const RecipePage: NextPage<RecipePageProps> = ({recipe, labels}) => {
                             id={`${label.name}-${label.id}`}
                             name={label.name}
                             onChange={handleLabelChange}
-                            checked={recipeLabels[label.name]}
+                            checked={recipeLabels[label.name] ?? false}
                             type="checkbox"
                         />
                         <label htmlFor={`${label.name}-${label.id}`}>{label.name}</label>
@@ -92,7 +116,7 @@ const RecipePage: NextPage<RecipePageProps> = ({recipe, labels}) => {
                     <button
                         id="recipe-save-btn"
                         className="button success"
-                        onClick={handleRecipeSave}
+                        type="submit"
                     >
                         Save recipe
                     </button>
@@ -106,26 +130,10 @@ const RecipePage: NextPage<RecipePageProps> = ({recipe, labels}) => {
     </PageLayout>)
 }
 
-export const getStaticPaths: GetStaticPaths = async (context) => {
-    const {} = context
-    const recipes = await shoppingManagerStore.recipe.findAllRecipes();
-    const recipePaths = recipes.map(recipe => ({params: {recipeId: recipe.id}}));
-    console.log({recipePaths})
-    return {paths: recipePaths, fallback: true};
-}
-
-export const getStaticProps: GetStaticProps<RecipePageProps, RecipePageParams> = async (context: GetStaticPropsContext<RecipePageParams>) => {
-    const recipeId = context.params?.recipeId;
-    const labels = await shoppingManagerStore.recipeLabel.findAllRecipeLabels();
-    const props: RecipePageProps = {
-        recipe: null, labels
+export const getServerSideProps: GetServerSideProps = async () => {
+    return {
+        props: {},
     };
-
-    if (recipeId) {
-        props.recipe = await shoppingManagerStore.recipe.findRecipeById(recipeId);
-    }
-
-    return {props}
 }
 
 export default RecipePage;

@@ -1,6 +1,7 @@
 import {addRecipeToMealPlan, deleteRecipeFromMealPlan, findMealPlan, reOrderMealPlanRecipes} from "./meal-plans";
 
-import {createRecipe, deleteRecipe, findAllRecipes, updateRecipe} from "./recipes";
+import {createRecipe, deleteRecipe, findAllRecipes, findRecipeById, updateRecipe} from "./recipes";
+import {findAllRecipeLabels} from "@services/recipe-api-client/recipe-labels";
 
 
 export const recipeApiClient = {
@@ -14,5 +15,9 @@ export const recipeApiClient = {
     createRecipe,
     deleteRecipe,
     updateRecipe,
-    findAllRecipes
+    findAllRecipes,
+    findRecipeById,
+
+    // recipe labels
+    findAllRecipeLabels
 };
