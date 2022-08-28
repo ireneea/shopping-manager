@@ -1,6 +1,6 @@
 import {NextApiRequest, NextApiResponse} from "next";
 import {ApiError} from "@libs/api-utils";
-import {RecipeModel, updateRecipe, UpdateRecipeInput} from "@store";
+import {RecipeModel, shoppingManagerStore, UpdateRecipeInput} from "@store";
 
 export const updateRecipeHandler = async (
     req: NextApiRequest,
@@ -8,7 +8,7 @@ export const updateRecipeHandler = async (
 ) => {
   try {
     const input = req.body as UpdateRecipeInput;
-    const updatedRecipe = await updateRecipe(input)
+    const updatedRecipe = await shoppingManagerStore.recipe.updateRecipe(input)
     return res.status(updatedRecipe ? 200 : 204).json(updatedRecipe);
   } catch (err) {
     return res

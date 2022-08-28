@@ -1,5 +1,5 @@
 import {NextApiRequest, NextApiResponse} from "next";
-import {addRecipeToMealPlan, AddRecipeToMealPlanInput, MealPlanModel,} from "@store";
+import {AddRecipeToMealPlanInput, MealPlanModel, shoppingManagerStore,} from "@store";
 import {ApiError} from "@libs/api-utils";
 
 export const addMealPlanRecipeHandler = async (
@@ -8,7 +8,7 @@ export const addMealPlanRecipeHandler = async (
 ) => {
   try {
     const input = req.body as AddRecipeToMealPlanInput;
-    const mealPlan = await addRecipeToMealPlan(input);
+    const mealPlan = await shoppingManagerStore.mealPlan.addRecipeToMealPlan(input);
 
     return res.status(200).json(mealPlan);
 

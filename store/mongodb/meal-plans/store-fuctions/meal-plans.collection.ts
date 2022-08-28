@@ -1,0 +1,1 @@
+export const MAEL_PLANS_COLLECTION = "meal-plans";

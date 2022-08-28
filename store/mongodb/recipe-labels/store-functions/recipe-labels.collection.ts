@@ -1,0 +1,1 @@
+export const RECIPE_LABEL_COLLECTION = "recipe-labels"
