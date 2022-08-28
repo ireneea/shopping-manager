@@ -1,15 +1,18 @@
-import {createRecipe} from "./create-recipe";
-import {deleteRecipe} from "./delete-recipe";
-import {addRecipeToMealPlan} from "./add-recipe-to-meal-plan";
-import {deleteRecipeFromMealPlan} from "@services/recipe-api-client/delete-recipe-from-meal-plan";
-import {reOrderMealPlanRecipes} from "@services/recipe-api-client/re-order-meal-plan-recipes";
-import {updateRecipe} from "@services/recipe-api-client/update-recipe";
+import {addRecipeToMealPlan, deleteRecipeFromMealPlan, findMealPlan, reOrderMealPlanRecipes} from "./meal-plans";
+
+import {createRecipe, deleteRecipe, findAllRecipes, updateRecipe} from "./recipes";
+
 
 export const recipeApiClient = {
-    createRecipe,
-    deleteRecipe,
+    // meal plan
     addRecipeToMealPlan,
     deleteRecipeFromMealPlan,
     reOrderMealPlanRecipes,
-    updateRecipe
+    findMealPlan,
+
+    // recipes
+    createRecipe,
+    deleteRecipe,
+    updateRecipe,
+    findAllRecipes
 };

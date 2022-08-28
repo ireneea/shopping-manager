@@ -1,7 +1,7 @@
 import {AddRecipeToMealPlanInput, MealPlanModel} from "@store";
 
-import {DEFAULT_HTTP_HEADER} from "./default-http-header";
-import {BASE_URL} from "./base-url";
+import {DEFAULT_HTTP_HEADER} from "../default-http-header";
+import {BASE_URL} from "../base-url";
 
 export const addRecipeToMealPlan = async (input: AddRecipeToMealPlanInput) => {
     const response = await fetch(

@@ -106,7 +106,8 @@ const RecipePage: NextPage<RecipePageProps> = ({recipe, labels}) => {
     </PageLayout>)
 }
 
-export const getStaticPaths: GetStaticPaths = async () => {
+export const getStaticPaths: GetStaticPaths = async (context) => {
+    const {} = context
     const recipes = await shoppingManagerStore.recipe.findAllRecipes();
     const recipePaths = recipes.map(recipe => ({params: {recipeId: recipe.id}}));
     return {paths: recipePaths, fallback: true};
