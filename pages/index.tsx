@@ -105,7 +105,17 @@ const Home: NextPage = () => {
             });
 
             if (plan) {
-                setMealPlan(plan);
+                setMealPlan(prevState => {
+                    if (prevState) {
+                        return {
+                            name: prevState.name,
+                            id: prevState.id,
+                            recipes: prevState.recipes.filter(r => r.id != recipeId)
+                        }
+                    }
+
+                    return undefined;
+                });
             }
         }
     };

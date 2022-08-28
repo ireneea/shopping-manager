@@ -1,6 +1,7 @@
 import {BASE_URL} from "@services/recipe-api-client/base-url";
 import {DEFAULT_HTTP_HEADER} from "@services/recipe-api-client/default-http-header";
-import {DeleteRecipeFromMealPlanInput, MealPlanModel} from "@store";
+import {DeleteRecipeFromMealPlanInput} from "@store";
+import {DeleteMealPlanRecipeResponse} from "@services/recipe-api";
 
 export const deleteRecipeFromMealPlan = async (
     input: DeleteRecipeFromMealPlanInput
@@ -11,9 +12,9 @@ export const deleteRecipeFromMealPlan = async (
             method: "DELETE",
             ...DEFAULT_HTTP_HEADER,
         }
-  );
+    );
 
-  if (response.status < 300) {
-    return (await response.json()) as MealPlanModel;
-  }
+    if (response.status < 300) {
+        return (await response.json()) as DeleteMealPlanRecipeResponse;
+    }
 };
