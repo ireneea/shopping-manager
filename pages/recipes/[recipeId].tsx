@@ -109,7 +109,7 @@ const RecipePage: NextPage<RecipePageProps> = ({recipe, labels}) => {
 export const getStaticPaths: GetStaticPaths = async () => {
     const recipes = await shoppingManagerStore.recipe.findAllRecipes();
     const recipePaths = recipes.map(recipe => ({params: {recipeId: recipe.id}}));
-    return {paths: recipePaths, fallback: false};
+    return {paths: recipePaths, fallback: true};
 }
 
 export const getStaticProps: GetStaticProps<RecipePageProps, RecipePageParams> = async (context: GetStaticPropsContext<RecipePageParams>) => {
