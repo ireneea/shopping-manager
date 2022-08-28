@@ -1,10 +1,11 @@
 import {lowDgStore} from "./low-db";
 import {mongodbStore} from "./mongodb";
+import {StoreFunctions} from "./models/store-functions.interface";
 
 export * from "./models";
 export * from "./low-db";
 
-let store;
+let store: StoreFunctions;
 
 if (process.env.STORE === 'mongodb') {
     console.log("using mongodb")

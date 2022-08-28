@@ -15,7 +15,7 @@ export const addRecipeHandler = async (
     } else {
       return res
           .status(500)
-          .json({error: "Unexpected error while creating recipe`"});
+          .json({error: "Unexpected error while creating recipe"});
     }
 
   } catch (err) {

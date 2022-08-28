@@ -1,175 +1,198 @@
 import type {NextPage} from "next";
-import {GetStaticProps} from "next";
-import {useRouter} from "next/router";
 import {useEffect, useState} from "react";
 
-import {MealPlanModel, MealPlanRecipeModel, RecipeModel, shoppingManagerStore,} from "@store";
+import {MealPlanModel, MealPlanRecipeModel, RecipeModel,} from "@store";
 import {recipeApiClient} from "@services/recipe-api-client";
 import {MealPlanRecipeList, PageLayout, RecipeList, RecipeSearch} from "@components";
 
-interface HomePagePros {
-  recipes: RecipeModel[];
-  mealPlan: MealPlanModel;
-}
-
 function move<T>(from: number, to: number, arr: T[]): T[] {
-  const isIndexValid = (index: number, arrLength: number) =>
-      index >= 0 && index < arrLength;
+    const isIndexValid = (index: number, arrLength: number) =>
+        index >= 0 && index < arrLength;
 
-  if (
-    !isIndexValid(from, arr.length) ||
-    !isIndexValid(to, arr.length) ||
-    from === to
-  ) {
-    return arr;
-  }
+    if (
+        !isIndexValid(from, arr.length) ||
+        !isIndexValid(to, arr.length) ||
+        from === to
+    ) {
+        return arr;
+    }
 
-  const newArr = [...arr];
+    const newArr = [...arr];
 
-  const item = newArr.splice(from, 1)[0];
-  newArr.splice(to, 0, item);
+    const item = newArr.splice(from, 1)[0];
+    newArr.splice(to, 0, item);
 
-  return newArr;
+    return newArr;
 }
 
-const Home: NextPage<HomePagePros> = ({ recipes, mealPlan }) => {
-  const router = useRouter();
+const Home: NextPage = () => {
 
-  const [searchText, setSearchText] = useState<string>("");
+    const [searchText, setSearchText] = useState<string>("");
+    const [recipes, setRecipes] = useState<RecipeModel[]>([])
+    const [mealPlan, setMealPlan] = useState<MealPlanModel>()
+    const [filteredRecipes, setFilteredRecipes] = useState<RecipeModel[]>(recipes);
 
-  const [filteredRecipes, setFilteredRecipes] = useState<RecipeModel[]>(recipes);
+    useEffect(() => {
+        if (searchText) {
+            const matchingRecipes = recipes.filter((recipe) =>
+                recipe.name.toLowerCase().includes(searchText.toLowerCase())
+            );
+            setFilteredRecipes(matchingRecipes);
+        } else {
+            setFilteredRecipes(recipes);
+        }
+    }, [searchText, recipes]);
 
-  useEffect(() => {
-    if (searchText) {
-      const matchingRecipes = recipes.filter((recipe) =>
-        recipe.name.toLowerCase().includes(searchText.toLowerCase())
-      );
-      setFilteredRecipes(matchingRecipes);
-    } else {
-      setFilteredRecipes(recipes);
-    }
-  }, [searchText, recipes]);
+    useEffect(() => {
+        const fetchRecipes = async () => {
+            const result = await recipeApiClient.findAllRecipes();
+            if (result) {
+                setRecipes(result);
+            }
+        }
 
-  const handleRecipeCreate = async () => {
-    if (searchText) {
-      const addedRecipe = await recipeApiClient.createRecipe(searchText);
+        fetchRecipes().catch(console.error)
+    }, [])
 
-      if (addedRecipe) {
-        await handleRecipeAddToPlan(addedRecipe);
-        setSearchText("");
-        await router.replace(router.asPath);
-      }
-    }
-  };
+    useEffect(() => {
+        const fetchMealPlan = async () => {
+            const result = await recipeApiClient.findMealPlan();
+            if (result) {
+                setMealPlan(result);
+            }
+        }
 
-  const handleRecipeDelete = async (recipeId: string) => {
-    await recipeApiClient.deleteRecipe(recipeId);
-    await router.replace(router.asPath);
-  };
+        fetchMealPlan().catch(console.error)
+    }, [])
 
-  const handleRecipeAddToPlan = async (recipe: RecipeModel) => {
-    const plan = await recipeApiClient.addRecipeToMealPlan({
-      mealPlanId: mealPlan.id,
-      recipe,
-    });
+    const handleRecipeCreate = async () => {
+        if (searchText) {
+            const addedRecipe = await recipeApiClient.createRecipe(searchText);
 
-    if (plan) {
-      setSearchText("");
-      await router.replace(router.asPath);
-    }
-  };
+            if (addedRecipe) {
+                await handleRecipeAddToPlan(addedRecipe);
+                setRecipes(prevState => [addedRecipe, ...prevState]);
+                setSearchText("");
+            }
+        }
+    };
 
-  const handleRecipeDeleteFromPlan = async (recipeId: string) => {
-    const plan = await recipeApiClient.deleteRecipeFromMealPlan({
-      mealPlanId: mealPlan.id,
-      mealPlanRecipeId: recipeId,
-    });
+    const handleRecipeDelete = async (recipeId: string) => {
+        await recipeApiClient.deleteRecipe(recipeId);
+        setRecipes(prevState => prevState.filter(r => r.id !== recipeId))
+    };
 
-    if (plan) {
-      await router.replace(router.asPath);
-    }
-  };
+    const handleRecipeAddToPlan = async (recipe: RecipeModel) => {
+        if (mealPlan) {
 
-  const handleRecipeMoveUp = async (recipeId: string) => {
-    const index = mealPlan.recipes.findIndex(
-      (recipe) => recipe.id === recipeId
-    );
-    const recipesIds = move<MealPlanRecipeModel>(
-      index,
-      index - 1,
-      mealPlan.recipes
-    ).map((r) => r.id);
-    const plan = await recipeApiClient.reOrderMealPlanRecipes({
-      mealPlanId: mealPlan.id,
-      recipesIds,
-    });
+            const plan = await recipeApiClient.addRecipeToMealPlan({
+                mealPlanId: mealPlan.id,
+                recipe,
+            });
 
-    if (plan) {
-      await router.replace(router.asPath);
-    }
-  };
+            if (plan) {
+                setSearchText("");
+                setMealPlan(plan);
+            }
+        }
+    };
 
-  const handleRecipeMoveDown = async (recipeId: string) => {
-    const index = mealPlan.recipes.findIndex(
-      (recipe) => recipe.id === recipeId
-    );
-    const recipesIds = move<MealPlanRecipeModel>(
-      index,
-      index + 1,
-      mealPlan.recipes
-    ).map((r) => r.id);
-    const plan = await recipeApiClient.reOrderMealPlanRecipes({
-      mealPlanId: mealPlan.id,
-      recipesIds,
-    });
+    const handleRecipeDeleteFromPlan = async (recipeId: string) => {
+        if (mealPlan) {
+            const plan = await recipeApiClient.deleteRecipeFromMealPlan({
+                mealPlanId: mealPlan.id,
+                mealPlanRecipeId: recipeId,
+            });
 
-    if (plan) {
-      await router.replace(router.asPath);
-    }
-  };
+            if (plan) {
+                setMealPlan(prevState => {
+                    if (prevState) {
+                        return {
+                            name: prevState.name,
+                            id: prevState.id,
+                            recipes: prevState.recipes.filter(r => r.id != recipeId)
+                        }
+                    }
 
-  return (
-      <PageLayout pageTitle="Meal Shopping Manager">
-        <RecipeSearch
-            searchText={searchText}
-            onSearchTextChange={setSearchText}
-            onRecipeCreateClick={handleRecipeCreate}
-        />
+                    return undefined;
+                });
+            }
+        }
+    };
 
-        {searchText ? (
-            <RecipeList
-                recipes={filteredRecipes}
-                onRecipeSelect={handleRecipeAddToPlan}
-        />
-      ) : (
-            <MealPlanRecipeList
-                recipes={mealPlan.recipes}
-                onRecipeDelete={handleRecipeDeleteFromPlan}
-                onRecipeMoveUp={handleRecipeMoveUp}
-                onRecipeMoveDown={handleRecipeMoveDown}
+    const handleRecipeMoveUp = async (recipeId: string) => {
+        if (mealPlan) {
+            const index = mealPlan.recipes.findIndex(
+                (recipe) => recipe.id === recipeId
+            );
+            const recipesIds = move<MealPlanRecipeModel>(
+                index,
+                index - 1,
+                mealPlan.recipes
+            ).map((r) => r.id);
+            const plan = await recipeApiClient.reOrderMealPlanRecipes({
+                mealPlanId: mealPlan.id,
+                recipesIds,
+            });
+
+            if (plan) {
+                setMealPlan(plan);
+            }
+        }
+    };
+
+    const handleRecipeMoveDown = async (recipeId: string) => {
+        if (mealPlan) {
+            const index = mealPlan.recipes.findIndex(
+                (recipe) => recipe.id === recipeId
+            );
+            const recipesIds = move<MealPlanRecipeModel>(
+                index,
+                index + 1,
+                mealPlan.recipes
+            ).map((r) => r.id);
+            const plan = await recipeApiClient.reOrderMealPlanRecipes({
+                mealPlanId: mealPlan.id,
+                recipesIds,
+            });
+
+            if (plan) {
+                setMealPlan(plan);
+            }
+        }
+    };
+
+    return (
+        <PageLayout pageTitle="Meal Shopping Manager">
+            <RecipeSearch
+                searchText={searchText}
+                onSearchTextChange={setSearchText}
+                onRecipeCreateClick={handleRecipeCreate}
             />
-      )}
 
-      <hr />
-      <h2>Recipes</h2>
-      <RecipeList
-        recipes={recipes}
-        onRecipeSelect={handleRecipeAddToPlan}
-        onRecipeDelete={handleRecipeDelete}
-      />
-    </PageLayout>
-  );
-};
+            {searchText ? (
+                <RecipeList
+                    recipes={filteredRecipes}
+                    onRecipeSelect={handleRecipeAddToPlan}
+                />
+            ) : (
+                <MealPlanRecipeList
+                    recipes={mealPlan?.recipes ?? []}
+                    onRecipeDelete={handleRecipeDeleteFromPlan}
+                    onRecipeMoveUp={handleRecipeMoveUp}
+                    onRecipeMoveDown={handleRecipeMoveDown}
+                />
+            )}
 
-export const getStaticProps: GetStaticProps = async () => {
-  const recipes = await shoppingManagerStore.recipe.findAllRecipes();
-  const mealPlans = await shoppingManagerStore.mealPlan.findAllMealPlans();
-  return {
-    props: {
-      recipes,
-      mealPlan: mealPlans[0],
-    },
-  };
+            <hr/>
+            <h2>Recipes</h2>
+            <RecipeList
+                recipes={recipes}
+                onRecipeSelect={handleRecipeAddToPlan}
+                onRecipeDelete={handleRecipeDelete}
+            />
+        </PageLayout>
+    );
 };
 
 export default Home;

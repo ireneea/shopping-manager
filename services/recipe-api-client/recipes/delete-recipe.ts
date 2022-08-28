@@ -1,7 +1,7 @@
 import {DeleteRecipeResponse} from "@services/recipe-api";
 
-import {DEFAULT_HTTP_HEADER} from "@services/recipe-api-client/default-http-header";
-import {BASE_URL} from "./base-url";
+import {DEFAULT_HTTP_HEADER} from "../default-http-header";
+import {BASE_URL} from "../base-url";
 import {HttpMethod} from "@libs/api-utils";
 
 export const deleteRecipe = async (recipeId: string) => {

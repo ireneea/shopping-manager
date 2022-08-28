@@ -77,7 +77,7 @@ export const mongodbStore: StoreFunctions = {
     },
     recipeLabel: {
         findAllRecipeLabels: async () => {
-            const storeRecipeLabels = await findAllRecipeLabels()
+            const storeRecipeLabels = await findAllRecipeLabels();
             return storeRecipeLabels.map(mapRecipeLabelStoreToRecipeLabel);
         },
     }
