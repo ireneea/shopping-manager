@@ -31,7 +31,7 @@ const RecipePage: NextPage<RecipePageProps> = ({recipe, labels}) => {
 
     const isRecipeFound = !!recipe
     const [recipeName, setRecipeName] = useState<string>(recipe?.name ?? "")
-    const [recipeLabels, setRecipeLabel] = useState<LabelsDictionary>(setRecipeInput(recipe?.labels ?? [], labels))
+    const [recipeLabels, setRecipeLabel] = useState<LabelsDictionary>(setRecipeInput(recipe?.labels ?? [], labels ?? []))
 
 
     const handleRecipeNameChange: ChangeEventHandler<HTMLInputElement> = (event) => {
@@ -110,12 +110,13 @@ export const getStaticPaths: GetStaticPaths = async (context) => {
     const {} = context
     const recipes = await shoppingManagerStore.recipe.findAllRecipes();
     const recipePaths = recipes.map(recipe => ({params: {recipeId: recipe.id}}));
+    console.log({recipePaths})
     return {paths: recipePaths, fallback: true};
 }
 
 export const getStaticProps: GetStaticProps<RecipePageProps, RecipePageParams> = async (context: GetStaticPropsContext<RecipePageParams>) => {
     const recipeId = context.params?.recipeId;
-    const labels = await shoppingManagerStore.recipeLabel.findAllRecipeLabels()
+    const labels = await shoppingManagerStore.recipeLabel.findAllRecipeLabels();
     const props: RecipePageProps = {
         recipe: null, labels
     };
@@ -126,6 +127,5 @@ export const getStaticProps: GetStaticProps<RecipePageProps, RecipePageParams> =
 
     return {props}
 }
-
 
 export default RecipePage;
