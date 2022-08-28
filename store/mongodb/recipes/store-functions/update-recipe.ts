@@ -1,7 +1,8 @@
+import {Collection} from "mongodb";
+
 import {RECIPES_COLLECTION} from "./recipes.collection";
 import {getDb} from "../../utils";
 import {RecipeStoreModel} from "../models";
-import {Collection} from "mongodb";
 
 export const updateRecipe = async (input: RecipeStoreModel) => {
     const db = await getDb();

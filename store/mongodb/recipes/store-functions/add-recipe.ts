@@ -1,4 +1,5 @@
-import {ObjectId, WithoutId} from "mongodb";
+import {Collection, ObjectId, WithoutId} from "mongodb";
+
 import {RECIPES_COLLECTION} from "./recipes.collection";
 import {getDb} from "../../utils";
 import {AddRecipeInput} from "@store";
@@ -6,9 +7,9 @@ import {RecipeStoreModel} from "../models";
 
 export const addRecipe = async (input: AddRecipeInput) => {
     const db = await getDb();
-    const collection = db.collection(RECIPES_COLLECTION);
+    const collection: Collection<WithoutId<RecipeStoreModel>> = db.collection(RECIPES_COLLECTION);
 
-    const newRecipe: WithoutId<RecipeStoreModel> = {
+    const newRecipe = {
         name: input.name,
         labels: []
     }
