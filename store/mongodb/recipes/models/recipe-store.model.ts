@@ -1,5 +1,5 @@
 import {ObjectId} from "mongodb";
-import {RecipeLabelStoreModel} from "./recipe-label-store.model";
+import {RecipeLabelStoreModel} from "../../recipe-labels";
 
 export interface RecipeStoreModel {
     _id: ObjectId;

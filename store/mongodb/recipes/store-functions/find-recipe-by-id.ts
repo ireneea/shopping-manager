@@ -1,6 +1,6 @@
 import {ObjectId} from "mongodb";
 import {RECIPES_COLLECTION} from "./recipes.collection";
-import {getDb} from "../utils";
+import {getDb} from "../../utils";
 import {RecipeStoreModel} from "../models";
 
 export const findRecipeById = async (recipeId: string) => {

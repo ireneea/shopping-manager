@@ -1,4 +1,4 @@
-import {getDb} from "../utils";
+import {getDb} from "../../utils";
 import {RECIPES_COLLECTION} from "./recipes.collection";
 import {RecipeStoreModel} from "../models";
 import {WithId} from "mongodb";

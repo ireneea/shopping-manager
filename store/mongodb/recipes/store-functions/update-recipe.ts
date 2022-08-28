@@ -1,5 +1,5 @@
 import {RECIPES_COLLECTION} from "./recipes.collection";
-import {getDb} from "../utils";
+import {getDb} from "../../utils";
 import {RecipeStoreModel} from "../models";
 import {Collection} from "mongodb";
 

@@ -1,6 +1,6 @@
-import {RecipeStoreModel} from "../../models";
+import {RecipeStoreModel} from "../models";
 import {RecipeModel} from "@store";
-import {mapRecipeLabelStoreToRecipeLabel} from "./map-recipe-label-store-to-recipe-label";
+import {mapRecipeLabelStoreToRecipeLabel} from "../../recipe-labels";
 
 export const mapRecipeStoreToRecipeModel = (recipeStore: RecipeStoreModel): RecipeModel => ({
     id: recipeStore._id.toHexString(),

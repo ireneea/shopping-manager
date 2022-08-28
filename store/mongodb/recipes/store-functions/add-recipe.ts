@@ -1,6 +1,6 @@
 import {ObjectId, WithoutId} from "mongodb";
 import {RECIPES_COLLECTION} from "./recipes.collection";
-import {getDb} from "../utils";
+import {getDb} from "../../utils";
 import {AddRecipeInput} from "@store";
 import {RecipeStoreModel} from "../models";
 

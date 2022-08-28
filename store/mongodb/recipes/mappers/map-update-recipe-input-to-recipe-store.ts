@@ -1,6 +1,7 @@
 import {ObjectId} from "mongodb";
 import {RecipeLabelModel, UpdateRecipeInput} from "@store";
-import {RecipeLabelStoreModel, RecipeStoreModel} from "../../models";
+import {RecipeStoreModel} from "../models";
+import {RecipeLabelStoreModel} from "../../recipe-labels";
 
 const mapRecipeLabelToRecipeLabelStore = (label: RecipeLabelModel) => {
     const storeLabel: RecipeLabelStoreModel = {
@@ -9,7 +10,6 @@ const mapRecipeLabelToRecipeLabelStore = (label: RecipeLabelModel) => {
     }
     return storeLabel
 }
-
 
 export const mapUpdateRecipeInputToRecipeStore = (input: UpdateRecipeInput): RecipeStoreModel => ({
         _id: new ObjectId(input.recipeId),

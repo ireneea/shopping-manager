@@ -1,7 +1,15 @@
 import {StoreFunctions} from "../models/store-functions.interface";
 import {AddRecipeInput, UpdateRecipeInput} from "@store";
-import {addRecipe, deleteRecipe, findAllRecipes, findRecipeById, updateRecipe} from "./store-functions";
-import {mapRecipeStoreToRecipeModel, mapUpdateRecipeInputToRecipeStore} from "./utils/mappers";
+import {
+    addRecipe,
+    deleteRecipe,
+    findAllRecipes,
+    findRecipeById,
+    mapRecipeStoreToRecipeModel,
+    mapUpdateRecipeInputToRecipeStore,
+    updateRecipe
+} from "./recipes";
+import {findAllRecipeLabels, mapRecipeLabelStoreToRecipeLabel} from "./recipe-labels";
 
 const MOCK_MEAL_PLAN = {
     id: "A04B2C78-6CA9-41FF-A0D2-68FCFD28C6A6",
@@ -41,6 +49,9 @@ export const mongodbStore: StoreFunctions = {
         },
     },
     recipeLabel: {
-        findAllRecipeLabels: async () => [],
+        findAllRecipeLabels: async () => {
+            const storeRecipeLabels = await findAllRecipeLabels()
+            return storeRecipeLabels.map(mapRecipeLabelStoreToRecipeLabel);
+        },
     }
 }
