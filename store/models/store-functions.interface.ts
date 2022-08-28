@@ -17,7 +17,7 @@ export interface MealPlanStoreFunctions {
 }
 
 export interface RecipeStoreFunctions {
-    addRecipe: (input: AddRecipeInput) => Promise<RecipeModel>;
+    addRecipe: (input: AddRecipeInput) => Promise<RecipeModel | null>;
     deleteRecipe: (id: string) => Promise<RecipeModel | null>;
     findAllRecipes: () => Promise<RecipeModel[]>;
     findRecipeById: (id: string) => Promise<RecipeModel | null>;
@@ -27,7 +27,6 @@ export interface RecipeStoreFunctions {
 export interface RecipeLabelStoreFunctions {
     findAllRecipeLabels: () => Promise<RecipeLabelModel[]>;
 }
-
 
 export interface StoreFunctions {
     mealPlan: MealPlanStoreFunctions

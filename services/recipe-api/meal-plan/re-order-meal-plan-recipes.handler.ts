@@ -1,6 +1,6 @@
 import {NextApiRequest, NextApiResponse} from "next";
 import {ApiError} from "@libs/api-utils";
-import {findMealPlanById, MealPlanModel, MealPlanRecipeModel, shoppingManagerStore,} from "@store";
+import {MealPlanModel, MealPlanRecipeModel, shoppingManagerStore,} from "@store";
 import {ReOrderMealPlanRecipesInput} from "./re-order-meal-plan-recipes.input";
 
 export const reOrderMealPlanRecipesHandler = async (
@@ -10,7 +10,7 @@ export const reOrderMealPlanRecipesHandler = async (
   try {
     const input = req.body as ReOrderMealPlanRecipesInput;
     const {mealPlanId, recipesIds} = input;
-    const mealPlan = await findMealPlanById(mealPlanId);
+    const mealPlan = await shoppingManagerStore.mealPlan.findMealPlanById(mealPlanId);
 
     if (!mealPlan) {
       return res

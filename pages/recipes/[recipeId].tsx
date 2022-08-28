@@ -1,6 +1,6 @@
 import {PageLayout} from "@components";
 import {GetStaticPaths, GetStaticProps, GetStaticPropsContext, NextPage} from "next";
-import {findAllRecipeLabels, findAllRecipes, findRecipeById, RecipeLabelModel, RecipeModel} from "@store";
+import {RecipeLabelModel, RecipeModel, shoppingManagerStore} from "@store";
 import {ChangeEventHandler, useState} from "react";
 import {recipeApiClient} from "@services/recipe-api-client";
 import {useRouter} from "next/router";
@@ -107,20 +107,20 @@ const RecipePage: NextPage<RecipePageProps> = ({recipe, labels}) => {
 }
 
 export const getStaticPaths: GetStaticPaths = async () => {
-    const recipes = await findAllRecipes();
+    const recipes = await shoppingManagerStore.recipe.findAllRecipes();
     const recipePaths = recipes.map(recipe => ({params: {recipeId: recipe.id}}));
     return {paths: recipePaths, fallback: false};
 }
 
 export const getStaticProps: GetStaticProps<RecipePageProps, RecipePageParams> = async (context: GetStaticPropsContext<RecipePageParams>) => {
     const recipeId = context.params?.recipeId;
-    const labels = await findAllRecipeLabels()
+    const labels = await shoppingManagerStore.recipeLabel.findAllRecipeLabels()
     const props: RecipePageProps = {
         recipe: null, labels
     };
 
     if (recipeId) {
-        props.recipe = await findRecipeById(recipeId);
+        props.recipe = await shoppingManagerStore.recipe.findRecipeById(recipeId);
     }
 
     return {props}

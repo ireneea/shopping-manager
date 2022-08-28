@@ -10,7 +10,14 @@ export const addRecipeHandler = async (
     const input = req.body as AddRecipeInput;
     const recipe = await shoppingManagerStore.recipe.addRecipe(input);
 
-    return res.status(200).json(recipe);
+    if (recipe) {
+      return res.status(200).json(recipe);
+    } else {
+      return res
+          .status(500)
+          .json({error: "Unexpected error while creating recipe`"});
+    }
+
   } catch (err) {
     return res
       .status(500)
